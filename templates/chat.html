@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Government Civic Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg">
+    <style>
+        /* Pulse animation for chatbox */
+        .pulse {
+            animation: pulse-animation 1s 2;
+        }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.5); }
+            70% { box-shadow: 0 0 0 20px rgba(59,130,246,0); }
+            100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+        }
+        /* Live animated gradient for header buttons */
+        .live-gradient {
+            background: linear-gradient(270deg, #2563eb, #f59e42, #22c55e, #2563eb);
+            background-size: 600% 600%;
+            animation: gradientMove 6s ease-in-out infinite;
+        }
+        @keyframes gradientMove {
+            0% {background-position:0% 50%}
+            50% {background-position:100% 50%}
+            100% {background-position:0% 50%}
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-white to-green-100 min-h-screen flex flex-col overflow-hidden">
+    <!-- Welcome Splash Screen -->
+    <div id="splash" class="fixed inset-0 flex flex-col items-center justify-center bg-blue-900 z-50 text-white transition-opacity duration-700">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-24 h-24 mb-4 animate-bounce">
+        <h1 class="text-4xl font-bold mb-2">Welcome to the Official Civic Chatbo tMade by Abhay</h1>
+        <p class="text-lg">Empowering citizens with trusted civic information</p>
+    </div>
+    <!-- Modern Animated Background (blobs) - covers full viewport -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 w-full h-full overflow-hidden">
+            <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-br from-blue-900 via-blue-600 to-orange-300 opacity-60 blur-3xl animate-blob1"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-green-200 via-orange-400 to-blue-600 opacity-50 blur-3xl animate-blob2"></div>
+            <div class="absolute top-[30%] left-[50%] w-[30vw] h-[30vw] rounded-full bg-gradient-to-tl from-orange-300 via-white to-green-500 opacity-40 blur-2xl animate-blob3"></div>
+        </div>
+        <style>
+            @keyframes blob1 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(10vw, 5vw) scale(1.1);}
+                66% { transform: translate(-5vw, 10vw) scale(0.95);}
+            }
+            @keyframes blob2 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(-8vw, -4vw) scale(1.05);}
+                66% { transform: translate(6vw, 8vw) scale(1.15);}
+            }
+            @keyframes blob3 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(-6vw, 6vw) scale(1.08);}
+                66% { transform: translate(8vw, -8vw) scale(0.92);}
+            }
+            .animate-blob1 { animation: blob1 18s ease-in-out infinite; }
+            .animate-blob2 { animation: blob2 22s ease-in-out infinite; }
+            .animate-blob3 { animation: blob3 20s ease-in-out infinite; }
+        </style>
+    </div>
+    <!-- Header: All content in one horizontal line -->
+    <header class="bg-blue-900 text-white py-4 shadow-lg relative z-10">
+        <div class="max-w-5xl mx-auto flex items-center gap-6 px-4 justify-between">
+            <div class="flex items-center gap-4 min-w-0">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-12 h-12 rounded-full shadow-md flex-shrink-0" aria-label="Government Emblem">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-3 min-w-0">
+                    <span class="text-2xl sm:text-3xl font-bold tracking-wide truncate">Government Civic Chatbot</span>
+                    <span class="text-blue-100 text-sm truncate">Official Civic Information Assistant</span>
+                </div>
+            </div>
+            <div class="flex gap-2 ml-auto">
+                <a href="/admin" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Admin Interface</a>
+                <a href="#contact" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Contact Us</a>
+            </div>
+        </div>
+    </header>
+    <!-- Main Chat Area -->
+    <main class="flex-1 flex items-center justify-center relative z-10">
+        <div id="chatbox" class="bg-white/90 p-8 rounded-2xl shadow-2xl w-full max-w-lg mt-8 hidden">
+            <h2 class="text-xl font-semibold mb-4 text-blue-900 text-center">Ask your civic questions below</h2>
+            <!-- Category Tabs and Suggestions -->
+            <div class="mb-4">
+                <div id="category-tabs" class="flex flex-wrap gap-2 mb-2"></div>
+                <div id="suggestions" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div id="messages" class="mb-4 h-64 overflow-y-auto border rounded p-2 bg-gray-50"></div>
+            <form id="chat-form" class="flex gap-2">
+                <input type="text" id="question" name="question" placeholder="Type your question..." required class="flex-1 px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" aria-label="Type your question">
+                <button type="submit" class="bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-800">Ask</button>
+            </form>
+        </div>
+    </main>
+    <!-- Chat JS Logic and Splash Logic -->
+    <script>
+        // Fetch categories and questions from backend
+        async function fetchSections() {
+            const res = await fetch('/sections');
+            if (!res.ok) return [];
+            return await res.json();
+        }
+        // Populate category tabs and suggestions
+        async function setupCategoryTabs() {
+            const sections = await fetchSections();
+            const tabs = document.getElementById('category-tabs');
+            const suggestions = document.getElementById('suggestions');
+            let activeIdx = 0;
+            function renderTabs() {
+                tabs.innerHTML = '';
+                sections.forEach((s, idx) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `px-4 py-2 rounded-t-lg font-semibold border-b-2 transition mb-[-2px] ${idx === activeIdx ? 'bg-blue-100 text-blue-900 border-orange-400' : 'bg-white text-blue-900 border-transparent hover:bg-blue-50'}`;
+                    btn.textContent = s.section;
+                    btn.onclick = () => {
+                        activeIdx = idx;
+                        renderTabs();
+                        renderSuggestions();
+                    };
+                    tabs.appendChild(btn);
+                });
+            }
+            function renderSuggestions() {
+                suggestions.innerHTML = '';
+                if (sections[activeIdx]) {
+                    sections[activeIdx].faqs.forEach(faq => {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'bg-blue-100 text-blue-900 px-3 py-1 rounded hover:bg-orange-100 border border-blue-200 mb-1';
+                        btn.textContent = faq.question;
+                        btn.onclick = () => {
+                            document.getElementById('question').value = faq.question;
+                        };
+                        suggestions.appendChild(btn);
+                    });
+                }
+            }
+            renderTabs();
+            renderSuggestions();
+        }
+        // Splash logic (no help block)
+        window.addEventListener('DOMContentLoaded', () => {
+            const splash = document.getElementById('splash');
+            const chatbox = document.getElementById('chatbox');
+            // Show splash for 2s, then show chatbox with pulse
+            setTimeout(() => {
+                splash.style.opacity = 0;
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    chatbox.classList.remove('hidden');
+                    chatbox.classList.add('pulse');
+                    setTimeout(() => chatbox.classList.remove('pulse'), 2000);
+                    setupCategoryTabs();
+                }, 700);
+            }, 2000);
+        });
+        // Handles chat form submission and message display
+        const form = document.getElementById('chat-form');
+        const messages = document.getElementById('messages');
+        function appendMessage(sender, text) {
+            const div = document.createElement('div');
+            div.className = `message mb-2 ${sender === 'user' ? 'text-blue-900' : 'text-green-700'}`;
+            div.innerHTML = `<b>${sender === 'user' ? 'You' : 'Bot'}:</b> ${text}`;
+            messages.appendChild(div);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('question');
+            const question = input.value.trim();
+            if (!question) return;
+            appendMessage('user', question);
+            input.value = '';
+            try {
+                const res = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `question=${encodeURIComponent(question)}`
+                });
+                if (!res.ok) throw new Error('Server error');
+                const data = await res.json();
+                appendMessage('bot', data.answer);
+            } catch (err) {
+                appendMessage('bot', 'Sorry, there was an error. Please try again.');
+            }
+        };
+    </script>
+</body>
+</html> 

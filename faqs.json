@@ -1,0 +1,23 @@
+[
+  {
+    "section": "Aadhar Card",
+    "faqs": [
+      {"question": "How to apply for Aadhar card?", "answer": "You can apply for an Aadhar card at your nearest enrollment center or online at uidai.gov.in."},
+      {"question": "How to update address in Aadhar?", "answer": "Visit the UIDAI website or an enrollment center to update your address."}
+    ]
+  },
+  {
+    "section": "PAN Card",
+    "faqs": [
+      {"question": "How to apply for PAN card?", "answer": "You can apply for a PAN card online at tin-nsdl.com or at a PAN center."},
+      {"question": "How to link PAN with Aadhar?", "answer": "You can link your PAN with Aadhar on the income tax e-filing portal."}
+    ]
+  },
+  {
+    "section": "Voter Card",
+    "faqs": [
+      {"question": "How to register for a Voter ID?", "answer": "You can register for a Voter ID online at nvsp.in or at your local election office."},
+      {"question": "How to update address in Voter ID?", "answer": "Submit Form 8 online at nvsp.in or visit your local election office."}
+    ]
+  }
+]

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin FAQ Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-blue-300 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-blue-800 text-white py-6 shadow-lg">
+        <div class="max-w-4xl mx-auto flex items-center gap-4 px-4">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Civic Icon" class="w-12 h-12 rounded-full shadow-md">
+            <div>
+                <h1 class="text-3xl font-bold tracking-wide">Civic Chatbot Admin</h1>
+                <p class="text-blue-100 text-sm">Manage your civic FAQ knowledge base</p>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col items-center justify-start">
+        <div class="w-full max-w-4xl mt-8 bg-white/90 p-8 rounded-2xl shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-semibold text-blue-800">FAQ Dashboard</h2>
+                <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Logout</a>
+            </div>
+            <!-- Add FAQ Button and Search -->
+            <div class="mb-6 flex flex-col sm:flex-row gap-4 items-center">
+                <input id="search" type="text" placeholder="Search FAQs..." class="flex-1 px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
+                <button onclick="openModal()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add FAQ</button>
+            </div>
+            <!-- FAQ Sections -->
+            <div class="overflow-x-auto">
+                {% for section in sections %}
+                <div class="mb-8">
+                    <h3 class="text-xl font-bold text-blue-700 mb-2">{{ section.section }}</h3>
+                    <table class="min-w-full bg-white rounded shadow mb-2" id="faq-table-{{ section.section }}">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b">#</th>
+                                <th class="py-2 px-4 border-b">Question</th>
+                                <th class="py-2 px-4 border-b">Answer</th>
+                                <th class="py-2 px-4 border-b">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="faq-body-{{ section.section }}">
+                            {% for faq in section.faqs %}
+                            <tr class="border-b faq-row">
+                                <!-- Edit FAQ Form -->
+                                <form method="POST" action="/admin/edit/{{ section.section }}/{{ loop.index0 }}" class="contents">
+                                    <td class="py-2 px-4">{{ loop.index }}</td>
+                                    <td class="py-2 px-4"><input type="text" name="question" value="{{ faq.question }}" required class="w-full px-2 py-1 border rounded"></td>
+                                    <td class="py-2 px-4"><input type="text" name="answer" value="{{ faq.answer }}" required class="w-full px-2 py-1 border rounded"></td>
+                                    <td class="py-2 px-4 flex gap-2">
+                                        <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Save</button>
+                                </form>
+                                <!-- Delete FAQ Form -->
+                                <form method="POST" action="/admin/delete/{{ section.section }}/{{ loop.index0 }}" onsubmit="return confirm('Delete this FAQ?')" class="inline">
+                                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
+                                </form>
+                                    </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Modal for adding FAQ -->
+        <div id="modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+            <div class="bg-white p-8 rounded shadow-md w-full max-w-md relative">
+                <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700">&times;</button>
+                <h3 class="text-xl font-bold mb-4">Add New FAQ</h3>
+                <!-- Add FAQ Form -->
+                <form method="POST" action="/admin/add" id="add-faq-form">
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-medium text-gray-700">Section</label>
+                        <input type="text" name="section" list="section-list" placeholder="e.g. Aadhar Card" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
+                        <datalist id="section-list">
+                            {% for section in sections %}
+                            <option value="{{ section.section }}">{{ section.section }}</option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-medium text-gray-700">Question</label>
+                        <input type="text" name="question" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block mb-2 text-sm font-medium text-gray-700">Answer</label>
+                        <input type="text" name="answer" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Add FAQ</button>
+                </form>
+            </div>
+        </div>
+        <!-- Notification -->
+        <div id="notification" class="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg hidden"></div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-blue-100 py-4 mt-8 shadow-inner">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center px-4">
+            <span>&copy; 2024 Civic Chatbot Project</span>
+            <span>Empowering citizens with instant civic information</span>
+        </div>
+    </footer>
+    <script>
+        // Modal logic
+        function openModal() {
+            document.getElementById('modal').classList.remove('hidden');
+        }
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+        // Notification logic
+        function showNotification(msg) {
+            const notif = document.getElementById('notification');
+            notif.textContent = msg;
+            notif.classList.remove('hidden');
+            setTimeout(() => notif.classList.add('hidden'), 2000);
+        }
+        // Search/filter logic
+        document.getElementById('search').addEventListener('input', function() {
+            const val = this.value.toLowerCase();
+            document.querySelectorAll('.faq-row').forEach(row => {
+                const q = row.querySelector('input[name="question"]').value.toLowerCase();
+                const a = row.querySelector('input[name="answer"]').value.toLowerCase();
+                row.style.display = (q.includes(val) || a.includes(val)) ? '' : 'none';
+            });
+        });
+        // Show notification on form submit (add/edit/delete)
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function() {
+                showNotification('Action successful!');
+            });
+        });
+    </script>
+</body>
+</html> 
