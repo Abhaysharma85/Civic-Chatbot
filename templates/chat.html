@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Government Civic Chatbot</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg">
     <style>
         /* Pulse animation for chatbox */
@@ -32,7 +33,7 @@
     <!-- Welcome Splash Screen -->
     <div id="splash" class="fixed inset-0 flex flex-col items-center justify-center bg-blue-900 z-50 text-white transition-opacity duration-700">
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-24 h-24 mb-4 animate-bounce">
-        <h1 class="text-4xl font-bold mb-2">Welcome to the Official Civic Chatbo tMade by Abhay</h1>
+        <h1 class="text-4xl font-bold mb-2">Welcome to Civic Chatbot Made by Abhay</h1>
         <p class="text-lg">Empowering citizens with trusted civic information</p>
     </div>
     <!-- Modern Animated Background (blobs) - covers full viewport -->
@@ -70,12 +71,13 @@
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-12 h-12 rounded-full shadow-md flex-shrink-0" aria-label="Government Emblem">
                 <div class="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-3 min-w-0">
                     <span class="text-2xl sm:text-3xl font-bold tracking-wide truncate">Government Civic Chatbot</span>
-                    <span class="text-blue-100 text-sm truncate">Official Civic Information Assistant</span>
+                    <span class="text-blue-100 text-sm truncate"></span>
                 </div>
             </div>
             <div class="flex gap-2 ml-auto">
                 <a href="/admin" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Admin Interface</a>
-                <a href="#contact" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Contact Us</a>
+                
+                <a href="/questions" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Questions</a>
             </div>
         </div>
     </header>
@@ -106,12 +108,14 @@
         // Populate category tabs and suggestions
         async function setupCategoryTabs() {
             const sections = await fetchSections();
+            // Filter out 'Common Questions' section
+            const filteredSections = sections.filter(s => s.section !== 'Common Questions');
             const tabs = document.getElementById('category-tabs');
             const suggestions = document.getElementById('suggestions');
             let activeIdx = 0;
             function renderTabs() {
                 tabs.innerHTML = '';
-                sections.forEach((s, idx) => {
+                filteredSections.forEach((s, idx) => {
                     const btn = document.createElement('button');
                     btn.type = 'button';
                     btn.className = `px-4 py-2 rounded-t-lg font-semibold border-b-2 transition mb-[-2px] ${idx === activeIdx ? 'bg-blue-100 text-blue-900 border-orange-400' : 'bg-white text-blue-900 border-transparent hover:bg-blue-50'}`;
@@ -126,8 +130,9 @@
             }
             function renderSuggestions() {
                 suggestions.innerHTML = '';
-                if (sections[activeIdx]) {
-                    sections[activeIdx].faqs.forEach(faq => {
+                if (filteredSections[activeIdx]) {
+                    // Show only the first 2 questions as demo suggestions
+                    filteredSections[activeIdx].faqs.slice(0, 2).forEach(faq => {
                         const btn = document.createElement('button');
                         btn.type = 'button';
                         btn.className = 'bg-blue-100 text-blue-900 px-3 py-1 rounded hover:bg-orange-100 border border-blue-200 mb-1';

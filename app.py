@@ -140,5 +140,10 @@ def get_sections():
         for section in sections
     ])
 
+@app.route('/questions')
+def questions():
+    sections = load_faqs()
+    return render_template('questions.html', sections=sections)
+
 if __name__ == '__main__':
     app.run(debug=True) 
