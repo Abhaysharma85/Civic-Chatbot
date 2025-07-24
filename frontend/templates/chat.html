@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Government Civic Chatbot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg">
+    <style>
+        /* Pulse animation for chatbox */
+        .pulse {
+            animation: pulse-animation 1s 2;
+        }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(59,130,246,0.5); }
+            70% { box-shadow: 0 0 0 20px rgba(59,130,246,0); }
+            100% { box-shadow: 0 0 0 0 rgba(59,130,246,0); }
+        }
+        /* Live animated gradient for header buttons */
+        .live-gradient {
+            background: linear-gradient(270deg, #2563eb, #f59e42, #22c55e, #2563eb);
+            background-size: 600% 600%;
+            animation: gradientMove 6s ease-in-out infinite;
+        }
+        @keyframes gradientMove {
+            0% {background-position:0% 50%}
+            50% {background-position:100% 50%}
+            100% {background-position:0% 50%}
+        }
+        /* Dark mode styles */
+        body.dark {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #0f172a 100%) !important;
+        }
+        body.dark #chatbox {
+            background: rgba(30, 41, 59, 0.95) !important;
+            color: #f1f5f9 !important;
+            border-color: #334155 !important;
+        }
+        body.dark header {
+            background: #0f172a !important;
+            color: #f1f5f9 !important;
+        }
+        body.dark .live-gradient {
+            color: #f1f5f9 !important;
+        }
+        body.dark #messages {
+            background: #1e293b !important;
+            color: #f1f5f9 !important;
+        }
+        body.dark input, body.dark textarea {
+            background: #334155 !important;
+            color: #f1f5f9 !important;
+            border-color: #475569 !important;
+        }
+        body.dark button, body.dark .live-gradient {
+            background: #334155 !important;
+            color: #f1f5f9 !important;
+        }
+        body.dark .text-blue-900 {
+            color: #60a5fa !important;
+        }
+        body.dark .text-green-700 {
+            color: #6ee7b7 !important;
+        }
+        body.dark #category-tabs button {
+            background: #1e293b !important;
+            color: #f1f5f9 !important;
+        }
+        body.dark #suggestions button {
+            background: #334155 !important;
+            color: #f1f5f9 !important;
+        }
+        /* Toggle switch animation */
+        .toggle-track {
+            background-color: #d1d5db;
+            transition: background-color 0.3s;
+        }
+        .toggle-thumb {
+            transition: transform 0.3s, background 0.3s;
+        }
+        #darkModeToggle:checked + .toggle-track {
+            background-color: #2563eb;
+        }
+        #darkModeToggle:checked + .toggle-track .toggle-thumb {
+            transform: translateX(1.25rem);
+            background: linear-gradient(135deg, #2563eb 0%, #f59e42 100%);
+        }
+        /* For accessibility: focus ring */
+        #darkModeToggle:focus + .toggle-track {
+            box-shadow: 0 0 0 2px #2563eb44;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-white to-green-100 min-h-screen flex flex-col overflow-hidden">
+    <!-- Welcome Splash Screen -->
+    <div id="splash" class="fixed inset-0 flex flex-col items-center justify-center bg-blue-900 z-50 text-white transition-opacity duration-1 px-4">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-24 h-24 mb-4 animate-bounce">
+        <h1 class="text-4xl font-bold mb-2">Welcome to Civic Chatbot Made by Abhay</h1>
+        <p class="text-lg">Empowering citizens with trusted civic information</p>
+    </div>
+    <!-- Header: All content in one horizontal line -->
+    <header class="bg-blue-900 text-white py-4 shadow-lg relative z-10">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center gap-4 sm:gap-6 px-2 sm:px-4 justify-between w-full">
+            <div class="flex items-center gap-3 min-w-0 flex-shrink-0 mb-2 sm:mb-0" style="margin-right: 0;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full shadow-md flex-shrink-0" aria-label="Government Emblem">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-3 min-w-0">
+                    <span class="text-lg sm:text-2xl font-bold tracking-wide truncate">Government Civic Chatbot</span>
+                    <span class="text-blue-100 text-xs sm:text-sm truncate"></span>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full sm:w-auto justify-center sm:justify-end">
+                <a href="/admin" class="live-gradient text-white font-semibold px-3 py-2 sm:px-5 rounded shadow hover:brightness-110 transition text-sm sm:text-base">Admin Interface</a>
+                <a href="/questions" class="live-gradient text-white font-semibold px-3 py-2 sm:px-5 rounded shadow hover:brightness-110 transition text-sm sm:text-base">Questions</a>
+                <!-- Dark mode toggle with animation -->
+                <label class="flex items-center cursor-pointer ml-2">
+                    <input type="checkbox" id="darkModeToggle" class="hidden">
+                    <span class="toggle-track w-10 h-5 flex items-center rounded-full p-1 duration-300 transition-colors bg-gray-300" id="toggleTrack">
+                        <span class="toggle-thumb bg-white w-4 h-4 rounded-full shadow-md transform duration-300 transition-transform" id="toggleThumb"></span>
+                    </span>
+                    <span class="ml-2 text-sm text-white select-none">Dark Mode</span>
+                </label>
+            </div>
+        </div>
+    </header>
+    <!-- Main Chat Area -->
+    <main class="flex-1 flex flex-col md:flex-row items-stretch justify-center relative z-10 w-full min-h-[80vh]">
+        <!-- Left: 3D Robot Image -->
+        <div class="hidden md:flex flex-col items-center justify-center w-1/2 max-w-lg pl-8">
+            <img src="https://assets10.lottiefiles.com/packages/lf20_kyu7xb1v.json" alt="Civic Robot" class="w-full max-w-xs drop-shadow-2xl" id="robot-lottie" />
+        </div>
+        <!-- Right: Chat Area -->
+        <div id="chatbox" class="bg-white/90 p-4 sm:p-8 rounded-2xl shadow-2xl w-full max-w-2xl mt-4 sm:mt-8 hidden mr-[3cm] border-4 border-blue-900 min-h-[80vh] flex flex-col justify-between">
+            <h2 class="text-lg sm:text-xl font-semibold mb-4 text-blue-900 text-center">Ask your civic questions below</h2>
+            <!-- Category Tabs and Suggestions -->
+            <div class="mb-4">
+                <div id="category-tabs" class="flex flex-wrap gap-2 mb-2"></div>
+                <div id="suggestions" class="flex flex-wrap gap-2"></div>
+            </div>
+            <div id="messages" class="mb-4 flex-1 overflow-y-auto border rounded p-2 bg-gray-50 text-sm sm:text-base" style="max-height: 350px;"></div>
+            <form id="chat-form" class="flex flex-col sm:flex-row gap-2">
+                <input type="text" id="question" name="question" placeholder="Type your question..." required class="flex-1 px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300 text-sm sm:text-base" aria-label="Type your question">
+                <button type="submit" class="bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-800 text-sm sm:text-base">Ask</button>
+            </form>
+        </div>
+    </main>
+    <!-- Chat JS Logic and Splash Logic -->
+    <script>
+        // Fetch categories and questions from backend
+        async function fetchSections() {
+            const res = await fetch('/sections');
+            if (!res.ok) return [];
+            return await res.json();
+        }
+        // Fetch all FAQs (with answers) for instant suggestion answers
+        async function fetchAllFaqs() {
+            const res = await fetch('/questions'); // We'll parse the HTML to get the data
+            if (!res.ok) return [];
+            const html = await res.text();
+            // Parse the HTML to extract the sections variable from a <script> tag (if available)
+            // But our /questions route just renders the template, so instead, let's fetch faqs.json directly
+            try {
+                const faqsRes = await fetch('/static/faqs.json');
+                if (!faqsRes.ok) return [];
+                return await faqsRes.json();
+            } catch {
+                return [];
+            }
+        }
+        // Populate category tabs and suggestions
+        async function setupCategoryTabs() {
+            // Use faqs.json directly for full Q&A
+            let sections = await fetchAllFaqs();
+            // Fallback: if not found, use /sections (questions only)
+            if (!sections.length) sections = await fetchSections();
+            // Filter out 'Common Questions' section
+            const filteredSections = sections.filter(s => s.section !== 'Common Questions');
+            const tabs = document.getElementById('category-tabs');
+            const suggestions = document.getElementById('suggestions');
+            let activeIdx = 0;
+            function renderTabs() {
+                tabs.innerHTML = '';
+                filteredSections.forEach((s, idx) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `px-4 py-2 rounded-t-lg font-semibold border-b-2 transition mb-[-2px] ${idx === activeIdx ? 'bg-blue-100 text-blue-900 border-orange-400' : 'bg-white text-blue-900 border-transparent hover:bg-blue-50'}`;
+                    btn.textContent = s.section;
+                    btn.onclick = () => {
+                        activeIdx = idx;
+                        renderTabs();
+                        renderSuggestions();
+                    };
+                    tabs.appendChild(btn);
+                });
+            }
+            function renderSuggestions() {
+                suggestions.innerHTML = '';
+                if (filteredSections[activeIdx]) {
+                    // Show only the first 2 questions as clickable buttons
+                    filteredSections[activeIdx].faqs.slice(0, 2).forEach(faq => {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'bg-blue-100 text-blue-900 px-3 py-1 rounded hover:bg-orange-100 border border-blue-200 mb-1 mr-1';
+                        btn.textContent = faq.question;
+                        btn.onclick = () => {
+                            // Show question in chat area immediately
+                            appendMessage('user', faq.question);
+                            // Fetch answer from backend for consistency
+                            fetch('/chat', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                                body: `question=${encodeURIComponent(faq.question)}`
+                            })
+                            .then(res => res.json())
+                            .then(data => appendMessage('bot', data.answer))
+                            .catch(() => appendMessage('bot', 'Sorry, there was an error. Please try again.'));
+                        };
+                        suggestions.appendChild(btn);
+                    });
+                }
+            }
+            renderTabs();
+            renderSuggestions();
+        }
+        // Splash logic (no help block)
+        window.addEventListener('DOMContentLoaded', () => {
+            const splash = document.getElementById('splash');
+            const chatbox = document.getElementById('chatbox');
+            // Show splash for 2s, then show chatbox with pulse
+            setTimeout(() => {
+                splash.style.opacity = 0;
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    chatbox.classList.remove('hidden');
+                    chatbox.classList.add('pulse');
+                    setTimeout(() => chatbox.classList.remove('pulse'), 2000);
+                    setupCategoryTabs();
+                }, 700);
+            }, 2000);
+        });
+        // Handles chat form submission and message display
+        const form = document.getElementById('chat-form');
+        const messages = document.getElementById('messages');
+        function appendMessage(sender, text) {
+            const div = document.createElement('div');
+            div.className = `message mb-2 ${sender === 'user' ? 'text-blue-900' : 'text-green-700'}`;
+            div.innerHTML = `<b>${sender === 'user' ? 'You' : 'Bot'}:</b> ${text}`;
+            messages.appendChild(div);
+            // Auto-scroll to bottom
+            messages.scrollTop = messages.scrollHeight;
+        }
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const input = document.getElementById('question');
+            const question = input.value.trim();
+            if (!question) return;
+            appendMessage('user', question);
+            input.value = '';
+            try {
+                const res = await fetch('/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `question=${encodeURIComponent(question)}`
+                });
+                if (!res.ok) throw new Error('Server error');
+                const data = await res.json();
+                appendMessage('bot', data.answer);
+            } catch (err) {
+                appendMessage('bot', 'Sorry, there was an error. Please try again.');
+            }
+        };
+        // Dark mode toggle logic with animation
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const toggleTrack = document.getElementById('toggleTrack');
+        const toggleThumb = document.getElementById('toggleThumb');
+        // On load, check localStorage
+        if (localStorage.getItem('darkMode') === 'on') {
+            document.body.classList.add('dark');
+            darkModeToggle.checked = true;
+            toggleTrack.classList.add('bg-blue-700');
+            toggleThumb.style.transform = 'translateX(1.25rem)';
+            toggleThumb.style.background = 'linear-gradient(135deg, #2563eb 0%, #f59e42 100%)';
+        }
+        darkModeToggle.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark');
+                localStorage.setItem('darkMode', 'on');
+                // Animate toggle
+                toggleTrack.classList.add('bg-blue-700');
+                toggleThumb.style.transform = 'translateX(1.25rem)';
+                toggleThumb.style.background = 'linear-gradient(135deg, #2563eb 0%, #f59e42 100%)';
+            } else {
+                document.body.classList.remove('dark');
+                localStorage.setItem('darkMode', 'off');
+                // Animate toggle
+                toggleTrack.classList.remove('bg-blue-700');
+                toggleThumb.style.transform = 'translateX(0)';
+                toggleThumb.style.background = '#fff';
+            }
+        });
+    </script>
+    <!-- Lottie player for robot (only if not already included) -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script>
+      // Replace the static img with a Lottie animation
+      window.addEventListener('DOMContentLoaded', () => {
+        const img = document.getElementById('robot-lottie');
+        if (img) {
+          const lottie = document.createElement('lottie-player');
+          lottie.setAttribute('src', 'https://assets10.lottiefiles.com/packages/lf20_kyu7xb1v.json');
+          lottie.setAttribute('background', 'transparent');
+          lottie.setAttribute('speed', '1');
+          lottie.setAttribute('style', 'width: 100%; max-width: 260px; height: auto;');
+          lottie.setAttribute('loop', '');
+          lottie.setAttribute('autoplay', '');
+          img.replaceWith(lottie);
+        }
+      });
+    </script>
+</body>
+</html> 
