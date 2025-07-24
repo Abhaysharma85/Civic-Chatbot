@@ -1,0 +1,330 @@
+[
+  {
+    "section": "Aadhar Card",
+    "faqs": [
+      {
+        "question": "How to apply for Aadhar card?",
+        "answer": "You can apply for an Aadhar card at your nearest enrollment center or online at uidai.gov.in."
+      },
+      {
+        "question": "How to update address in Aadhar?",
+        "answer": "Visit the UIDAI website or an enrollment center to update your address."
+      },
+      {
+        "question": "What is Aadhaar?",
+        "answer": "Aadhaar is a 12-digit unique identity number issued by UIDAI to residents of India based on their biometric and demographic data, primarily used for identification and delivery of services."
+      },
+      {
+        "question": "Is Aadhaar mandatory?",
+        "answer": "No. Aadhaar is voluntary \u2013 a Supreme Court ruling affirmed that no one can be denied basic services for not having Aadhaar :contentReference."
+      },
+      {
+        "question": "What information does Aadhaar collect?",
+        "answer": "It collects basic data: name, DOB, gender, address, mobile/email (optional), photo, ten fingerprints and iris scans. No sensitive data like religion, caste, or income is collected :contentReference."
+      },
+      {
+        "question": "What is e\u2011Aadhaar and is it valid?",
+        "answer": "e\u2011Aadhaar is a digitally signed, password-protected electronic copy available via UIDAI portal. It is legally valid just like a physical Aadhaar card :contentReference."
+      },
+      {
+        "question": "How can I download my e\u2011Aadhaar?",
+        "answer": "You can download it via the MyAadhaar portal using your Aadhaar number, VID, or enrollment ID. OTP will be sent to your registered mobile number :contentReference."
+      },
+      {
+        "question": "What is a Virtual ID (VID)?",
+        "answer": "VID is a 16-digit temporary, revocable number mapped to your Aadhaar, usable in place of the Aadhaar number for authentication. It cannot be reverse-engineered :contentReference."
+      },
+      {
+        "question": "What forms of Aadhaar are available?",
+        "answer": "The accepted forms are Aadhaar Letter (paper), PVC Aadhaar card, e\u2011Aadhaar, and the mAadhaar mobile app. All are considered equally valid ."
+      },
+      {
+        "question": "What is a PVC Aadhaar card?",
+        "answer": "A PVC Aadhaar card is a durable plastic card ordered online. It includes advanced security features and is as valid as the letter ."
+      },
+      {
+        "question": "How long does it take to get Aadhaar after enrolment?",
+        "answer": "It can take up to 90 days from the date of enrolment to generate and dispatch the Aadhaar letter by post ."
+      },
+      {
+        "question": "How long do updates to Aadhaar take?",
+        "answer": "Demographic or biometric updates may take up to 90 days from the request date to reflect in the system ."
+      },
+      {
+        "question": "How do I update details like address or name?",
+        "answer": "You can update details online via SSUP for demographic changes (with scanned docs). Biometric or mobile updates require a visit to an enrolment centre ."
+      },
+      {
+        "question": "How can I update my Aadhaar-linked mobile number?",
+        "answer": "Mobile number can only be updated at a nearby enrolment centre. Online update is not available, though you can book an appointment online ."
+      },
+      {
+        "question": "What is masked Aadhaar?",
+        "answer": "Masked Aadhaar hides the first 8 digits of your Aadhaar number, showing only the last 4 digits. It is acceptable for most e\u2011KYC purposes ."
+      },
+      {
+        "question": "Can private companies store my VID?",
+        "answer": "No. VID is temporary by design and cannot be stored. Only your consent allows authentication, and agencies aren't permitted to retain your VID ."
+      },
+      {
+        "question": "Does updating my Aadhaar share info with banks or mobile companies?",
+        "answer": "No. UIDAI only receives authentication requests and returns 'Yes' or 'No'. KYC providers only get basic info like name or address, not your bank or account details ."
+      },
+      {
+        "question": "How can I check the status of my Aadhaar update or enrolment?",
+        "answer": "Use the UIDAI portal (Check Aadhaar Status) or download e\u2011Aadhaar. You can also contact the helpline (1947) for updates ."
+      }
+    ]
+  },
+  {
+    "section": "PAN Card",
+    "faqs": [
+      {
+        "question": "How to apply for PAN card?",
+        "answer": "You can apply for a PAN card online at tin-nsdl.com or at a PAN center."
+      },
+      {
+        "question": "How to link PAN with Aadhar?",
+        "answer": "You can link your PAN with Aadhar on the income tax e-filing portal."
+      },
+      {
+        "question": "What is PAN?",
+        "answer": "PAN (Permanent Account Number) is a ten-digit alphanumeric number issued by the Income Tax Department to any 'person' who applies for it or to whom the department allots the number."
+      },
+      {
+        "question": "What is the validity of PAN?",
+        "answer": "PAN obtained once is valid for the lifetime of the PAN-holder throughout India, regardless of change of address or Assessing Officer."
+      },
+      {
+        "question": "Can a person hold more than one PAN?",
+        "answer": "No. A person cannot hold more than one PAN. Having more than one PAN is illegal and can attract a penalty of Rs. 10,000."
+      },
+      {
+        "question": "How can I apply for a PAN card?",
+        "answer": "You can apply for a PAN card online through the websites of UTIITSL or Protean (formerly NSDL eGov), or at a PAN Application Center."
+      },
+      {
+        "question": "What documents are required for PAN application?",
+        "answer": "You need proof of identity, proof of address, and proof of date of birth. The list of acceptable documents is available on the Income Tax Department website."
+      },
+      {
+        "question": "Is it mandatory to file a return of income after getting PAN?",
+        "answer": "No. Return is to be filed only if you are liable to file return of income under section 139."
+      },
+      {
+        "question": "Should I intimate my PAN to the deductor?",
+        "answer": "Yes. You should intimate your PAN to the person deducting tax. Non-furnishing of PAN results in TDS at a higher rate."
+      },
+      {
+        "question": "How can I check the status of my PAN application?",
+        "answer": "You can check the status online on the websites of Protean (NSDL) or UTIITSL using your acknowledgment number."
+      },
+      {
+        "question": "Can foreign citizens apply for PAN?",
+        "answer": "Yes. Foreign citizens can apply for PAN by submitting Form 49AA along with the required documents."
+      },
+      {
+        "question": "What should I do if I lose my PAN card?",
+        "answer": "You can apply for a reprint of your PAN card online through the NSDL or UTIITSL websites."
+      },
+      {
+        "question": "Can I update or correct details in my PAN card?",
+        "answer": "Yes. You can request changes or corrections in PAN data online or at a PAN center by submitting the required documents."
+      },
+      {
+        "question": "Is e-PAN valid?",
+        "answer": "Yes. e-PAN is a digitally signed PAN card issued in electronic format and is valid like a physical PAN card."
+      },
+      {
+        "question": "Are there any charges for e-PAN?",
+        "answer": "No. Instant e-PAN is issued free of cost if you apply using Aadhaar."
+      },
+      {
+        "question": "What is the pre-requisite for availing instant e-PAN?",
+        "answer": "You must not have a PAN, must have a valid Aadhaar with updated KYC details, and your mobile number must be linked to Aadhaar."
+      },
+      {
+        "question": "Do I need to submit physical documents for e-PAN?",
+        "answer": "No. The process is completely online and does not require submission of physical documents."
+      },
+      {
+        "question": "Will I get a physical PAN card if I apply for e-PAN?",
+        "answer": "No. You will be issued an e-PAN, which is a valid form of PAN. You can separately request a physical card if needed."
+      },
+      {
+        "question": "How do I get a physical PAN card if I already have a PAN?",
+        "answer": "You can request a reprint of your PAN card through the NSDL or UTIITSL websites."
+      },
+      {
+        "question": "What should I do if my Aadhaar authentication fails during e-KYC?",
+        "answer": "Ensure you enter the correct OTP. If it still fails, contact UIDAI for assistance."
+      },
+      {
+        "question": "Is in-person verification required for e-PAN?",
+        "answer": "No. The process is completely online and does not require in-person verification."
+      },
+      {
+        "question": "Can I apply for instant e-PAN if my Aadhaar is already linked to a PAN?",
+        "answer": "No. If your Aadhaar is already linked to a PAN, you cannot apply for instant e-PAN."
+      }
+    ]
+  },
+  {
+    "section": "Voter Card",
+    "faqs": [
+      {
+        "question": "How to register for a Voter ID?",
+        "answer": "You can register for a Voter ID online at nvsp.in or at your local election office."
+      },
+      {
+        "question": "How to update address in Voter ID?",
+        "answer": "Submit Form 8 online at nvsp.in or visit your local election office."
+      },
+      {
+        "question": "What is a Voter ID card?",
+        "answer": "A Voter ID card is an identity document issued by the Election Commission of India to eligible citizens to enable them to vote in elections."
+      },
+      {
+        "question": "Who is eligible to get a Voter ID card?",
+        "answer": "Any Indian citizen who is 18 years of age or above can apply for a Voter ID card."
+      },
+      {
+        "question": "How can I apply for a Voter ID card?",
+        "answer": "You can apply online through the National Voters' Service Portal (NVSP) or submit Form 6 at your local Electoral Registration Office."
+      },
+      {
+        "question": "What documents are required for a Voter ID application?",
+        "answer": "You need proof of age, proof of residence, and a recent passport-sized photograph."
+      },
+      {
+        "question": "How can I check the status of my Voter ID application?",
+        "answer": "You can check the status online on the NVSP portal using your application reference number."
+      },
+      {
+        "question": "How do I correct mistakes in my Voter ID card?",
+        "answer": "You can submit Form 8 online or at your local Electoral Registration Office to correct details."
+      },
+      {
+        "question": "How can I update my address in the Voter ID card?",
+        "answer": "Submit Form 8A online or at your local office to update your address."
+      },
+      {
+        "question": "Can I have more than one Voter ID card?",
+        "answer": "No. It is illegal to possess more than one Voter ID card."
+      },
+      {
+        "question": "What should I do if I lose my Voter ID card?",
+        "answer": "You can apply for a duplicate Voter ID card by submitting Form 002 at your local office."
+      },
+      {
+        "question": "How can I find my name in the electoral roll?",
+        "answer": "You can search for your name on the NVSP portal or at your local Electoral Registration Office."
+      },
+      {
+        "question": "Is it mandatory to carry the Voter ID card to vote?",
+        "answer": "Yes, you should carry your Voter ID card or any other approved identity document to the polling station."
+      },
+      {
+        "question": "Can NRIs vote in Indian elections?",
+        "answer": "Yes, NRIs can register as overseas voters and vote in Indian elections if they are present in their constituency on polling day."
+      },
+      {
+        "question": "How can I enroll as an NRI voter?",
+        "answer": "NRIs can fill Form 6A online or at the Electoral Registration Office in their home constituency."
+      },
+      {
+        "question": "What is EPIC?",
+        "answer": "EPIC stands for Electors Photo Identity Card, commonly known as the Voter ID card."
+      },
+      {
+        "question": "How often is the electoral roll updated?",
+        "answer": "The electoral roll is updated annually and before every election."
+      },
+      {
+        "question": "Can I vote if my name is not on the electoral roll?",
+        "answer": "No, only those whose names appear on the electoral roll are eligible to vote."
+      },
+      {
+        "question": "How can I delete my name from the electoral roll?",
+        "answer": "You can submit Form 7 to request deletion of your name from the electoral roll."
+      },
+      {
+        "question": "What is the minimum age for voting in India?",
+        "answer": "The minimum age for voting in India is 18 years."
+      },
+      {
+        "question": "Can I vote at any polling booth?",
+        "answer": "No, you can only vote at the polling booth assigned to your constituency as per the electoral roll."
+      },
+      {
+        "question": "How can I get information about my polling booth?",
+        "answer": "You can find your polling booth details on the NVSP portal or by contacting your local Electoral Registration Office."
+      }
+    ]
+  },
+  {
+    "section": "Common Questions",
+    "faqs": [
+      {
+        "question": "What are the working hours of government offices?",
+        "answer": "Most government offices are open from 9:00 AM to 5:00 PM, Monday to Friday."
+      },
+      {
+        "question": "How can I file a complaint?",
+        "answer": "You can file a complaint through the official government portal or visit your local office."
+      },
+      {
+        "question": "Where can I find government forms?",
+        "answer": "Government forms are available on the respective department's website or at the office."
+      },
+      {
+        "question": "How do I check the status of my application?",
+        "answer": "You can check the status of your application online using your application number on the relevant department's portal."
+      },
+      {
+        "question": "How to contact customer support?",
+        "answer": "You can contact customer support through the helpline number provided on the official website."
+      },
+      {
+        "question": "What is a birth certificate and how can I obtain one?",
+        "answer": "A birth certificate is an official document recording a person's birth. You can obtain it from your local municipal office or online through the state government portal."
+      },
+      {
+        "question": "How do I get a marriage certificate?",
+        "answer": "You can apply for a marriage certificate at your local municipal office or registrar of marriages, usually by submitting an application form and required documents."
+      },
+      {
+        "question": "How can I get a domicile certificate?",
+        "answer": "A domicile certificate can be obtained from the local tehsildar or district magistrate office by providing proof of residence and other required documents."
+      },
+      {
+        "question": "What is an income certificate and why is it needed?",
+        "answer": "An income certificate is issued by the government to certify a person\u2019s income from all sources. It is often required for scholarships, government schemes, and reservations."
+      },
+      {
+        "question": "How do I apply for a caste certificate?",
+        "answer": "You can apply for a caste certificate at your local tehsildar or revenue office by submitting proof of caste and residence."
+      },
+      {
+        "question": "How can I pay property tax?",
+        "answer": "Property tax can be paid at your local municipal office or online through the municipal corporation\u2019s website."
+      },
+      {
+        "question": "How do I register a complaint about civic issues (like roads, water, sanitation)?",
+        "answer": "You can register complaints through your municipal corporation\u2019s helpline, website, or mobile app."
+      },
+      {
+        "question": "How can I get a driving license?",
+        "answer": "You can apply for a driving license at your local Regional Transport Office (RTO) by submitting the required forms, documents, and passing the driving test."
+      },
+      {
+        "question": "How do I get a death certificate?",
+        "answer": "A death certificate can be obtained from the local municipal office or panchayat by submitting the required documents and application form."
+      },
+      {
+        "question": "How can I access government welfare schemes?",
+        "answer": "Information about government welfare schemes is available on official government portals, and you can apply online or at the relevant government office."
+      }
+    ]
+  }
+]
