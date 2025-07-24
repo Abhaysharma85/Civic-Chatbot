@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Questions - Government Civic Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg">
+    <style>
+        .live-gradient {
+            background: linear-gradient(270deg, #2563eb, #f59e42, #22c55e, #2563eb);
+            background-size: 600% 600%;
+            animation: gradientMove 6s ease-in-out infinite;
+        }
+        @keyframes gradientMove {
+            0% {background-position:0% 50%}
+            50% {background-position:100% 50%}
+            100% {background-position:0% 50%}
+        }
+        /* Subtle static gradient background */
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0fdf4 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col overflow-hidden">
+    <!-- Header -->
+    <header class="bg-blue-900 text-white py-4 shadow-lg relative z-10">
+        <div class="max-w-5xl mx-auto flex items-center gap-6 px-4 justify-between">
+            <div class="flex items-center gap-4 min-w-0">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-12 h-12 rounded-full shadow-md flex-shrink-0" aria-label="Government Emblem">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-3 min-w-0">
+                    <span class="text-2xl sm:text-3xl font-bold tracking-wide truncate">Government Civic Chatbot</span>
+                    <span class="text-blue-100 text-sm truncate">All Questions</span>
+                </div>
+            </div>
+            <div class="flex gap-2 ml-auto">
+                <a href="/" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Home</a>
+            </div>
+        </div>
+    </header>
+    <!-- Questions Grid -->
+    <main class="flex-1 flex flex-col items-center justify-start relative z-10 px-2 py-8">
+        <h2 class="text-3xl font-bold text-blue-900 mb-6 text-center">Frequently Asked Questions</h2>
+        <!-- Category Select Dropdown -->
+        <div class="w-full max-w-2xl mb-8 flex justify-center">
+            <select id="categorySelect" class="w-full sm:w-auto px-4 py-2 rounded border border-blue-300 focus:outline-none focus:ring focus:border-blue-500 text-base">
+                <option value="all">All Categories</option>
+                {% for section in sections %}
+                    <option value="{{ section.section|escape }}">{{ section.section }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div id="faqGrid" class="w-full max-w-6xl overflow-y-auto" style="max-height: 70vh;">
+            {% for section in sections %}
+                <h3 class="sticky top-0 z-10 bg-white/80 backdrop-blur font-bold text-lg text-orange-600 py-2 px-2 mb-4 border-l-4 border-orange-400 category-header" data-category="{{ section.section|escape }}">{{ section.section }}</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 category-group" data-category="{{ section.section|escape }}">
+                    {% for faq in section.faqs %}
+                    <div class="bg-white/90 rounded-2xl shadow-xl p-6 flex flex-col justify-between border border-blue-100 hover:shadow-2xl transition group">
+                        <div>
+                            <div class="text-blue-700 font-semibold text-lg mb-2 flex items-center gap-2">
+                                <span class="inline-block bg-blue-100 text-blue-700 rounded px-2 py-1 text-xs font-bold">Q</span>
+                                <span>{{ faq.question }}</span>
+                            </div>
+                            <div class="text-gray-700 text-base mb-4 pl-6 border-l-4 border-blue-200">
+                                {{ faq.answer }}
+                            </div>
+                        </div>
+                        <button class="copy-btn bg-green-500 hover:bg-green-600 text-white rounded-full px-4 py-2 mt-2 self-end transition focus:outline-none focus:ring flex items-center gap-2" data-question="{{ faq.question }}" title="Copy Question">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2zm0 0v2a2 2 0 002 2h4a2 2 0 002-2v-2" /></svg>
+                            <span>Copy Question</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+    <script>
+        // Category filter logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const select = document.getElementById('categorySelect');
+            const groups = document.querySelectorAll('.category-group');
+            const headers = document.querySelectorAll('.category-header');
+            select.addEventListener('change', function() {
+                const val = select.value;
+                groups.forEach(group => {
+                    group.style.display = (val === 'all' || group.getAttribute('data-category') === val) ? '' : 'none';
+                });
+                headers.forEach(header => {
+                    header.style.display = (val === 'all' || header.getAttribute('data-category') === val) ? '' : 'none';
+                });
+            });
+            // Copy button logic
+            document.querySelectorAll('.copy-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const q = btn.getAttribute('data-question');
+                    navigator.clipboard.writeText(q).then(function() {
+                        btn.querySelector('span').textContent = 'Copied!';
+                        setTimeout(() => {
+                            btn.querySelector('span').textContent = 'Copy Question';
+                        }, 1000);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

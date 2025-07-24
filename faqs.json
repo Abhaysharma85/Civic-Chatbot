@@ -2,32 +2,92 @@
   {
     "section": "Aadhar Card",
     "faqs": [
-      {"question": "How to apply for Aadhar card?", "answer": "You can apply for an Aadhar card at your nearest enrollment center or online at uidai.gov.in."},
-      {"question": "How to update address in Aadhar?", "answer": "Visit the UIDAI website or an enrollment center to update your address."},
-      {"question": "What is Aadhaar?", "answer": "Aadhaar is a 12-digit unique identity number issued by UIDAI to residents of India based on their biometric and demographic data, primarily used for identification and delivery of services."},
-      {"question": "Is Aadhaar mandatory?", "answer": "No. Aadhaar is voluntary – a Supreme Court ruling affirmed that no one can be denied basic services for not having Aadhaar :contentReference."},
-      {"question": "What information does Aadhaar collect?", "answer": "It collects basic data: name, DOB, gender, address, mobile/email (optional), photo, ten fingerprints and iris scans. No sensitive data like religion, caste, or income is collected :contentReference."},
-      {"question": "What is e‑Aadhaar and is it valid?", "answer": "e‑Aadhaar is a digitally signed, password-protected electronic copy available via UIDAI portal. It is legally valid just like a physical Aadhaar card :contentReference."},
-      {"question": "How can I download my e‑Aadhaar?", "answer": "You can download it via the MyAadhaar portal using your Aadhaar number, VID, or enrollment ID. OTP will be sent to your registered mobile number :contentReference."},
-      {"question": "What is a Virtual ID (VID)?", "answer": "VID is a 16-digit temporary, revocable number mapped to your Aadhaar, usable in place of the Aadhaar number for authentication. It cannot be reverse-engineered :contentReference."},
-      {"question": "What forms of Aadhaar are available?", "answer": "The accepted forms are Aadhaar Letter (paper), PVC Aadhaar card, e‑Aadhaar, and the mAadhaar mobile app. All are considered equally valid ."},
-      {"question": "What is a PVC Aadhaar card?", "answer": "A PVC Aadhaar card is a durable plastic card ordered online. It includes advanced security features and is as valid as the letter ."},
-      {"question": "How long does it take to get Aadhaar after enrolment?", "answer": "It can take up to 90 days from the date of enrolment to generate and dispatch the Aadhaar letter by post ."},
-      {"question": "How long do updates to Aadhaar take?", "answer": "Demographic or biometric updates may take up to 90 days from the request date to reflect in the system ."},
-      {"question": "How do I update details like address or name?", "answer": "You can update details online via SSUP for demographic changes (with scanned docs). Biometric or mobile updates require a visit to an enrolment centre ."},
-      {"question": "How can I update my Aadhaar-linked mobile number?", "answer": "Mobile number can only be updated at a nearby enrolment centre. Online update is not available, though you can book an appointment online ."},
-      {"question": "What is masked Aadhaar?", "answer": "Masked Aadhaar hides the first 8 digits of your Aadhaar number, showing only the last 4 digits. It is acceptable for most e‑KYC purposes ."},
-      {"question": "Can private companies store my VID?", "answer": "No. VID is temporary by design and cannot be stored. Only your consent allows authentication, and agencies aren't permitted to retain your VID ."},
-      {"question": "Does updating my Aadhaar share info with banks or mobile companies?", "answer": "No. UIDAI only receives authentication requests and returns 'Yes' or 'No'. KYC providers only get basic info like name or address, not your bank or account details ."},
-      {"question": "How can I check the status of my Aadhaar update or enrolment?", "answer": "Use the UIDAI portal (Check Aadhaar Status) or download e‑Aadhaar. You can also contact the helpline (1947) for updates ."}
+      {
+        "question": "How to apply for Aadhar card?",
+        "answer": "You can apply for an Aadhar card at your nearest enrollment center or online at uidai.gov.in."
+      },
+      {
+        "question": "How to update address in Aadhar?",
+        "answer": "Visit the UIDAI website or an enrollment center to update your address."
+      },
+      {
+        "question": "What is Aadhaar?",
+        "answer": "Aadhaar is a 12-digit unique identity number issued by UIDAI to residents of India based on their biometric and demographic data, primarily used for identification and delivery of services."
+      },
+      {
+        "question": "Is Aadhaar mandatory?",
+        "answer": "No. Aadhaar is voluntary \u2013 a Supreme Court ruling affirmed that no one can be denied basic services for not having Aadhaar :contentReference."
+      },
+      {
+        "question": "What information does Aadhaar collect?",
+        "answer": "It collects basic data: name, DOB, gender, address, mobile/email (optional), photo, ten fingerprints and iris scans. No sensitive data like religion, caste, or income is collected :contentReference."
+      },
+      {
+        "question": "What is e\u2011Aadhaar and is it valid?",
+        "answer": "e\u2011Aadhaar is a digitally signed, password-protected electronic copy available via UIDAI portal. It is legally valid just like a physical Aadhaar card :contentReference."
+      },
+      {
+        "question": "How can I download my e\u2011Aadhaar?",
+        "answer": "You can download it via the MyAadhaar portal using your Aadhaar number, VID, or enrollment ID. OTP will be sent to your registered mobile number :contentReference."
+      },
+      {
+        "question": "What is a Virtual ID (VID)?",
+        "answer": "VID is a 16-digit temporary, revocable number mapped to your Aadhaar, usable in place of the Aadhaar number for authentication. It cannot be reverse-engineered :contentReference."
+      },
+      {
+        "question": "What forms of Aadhaar are available?",
+        "answer": "The accepted forms are Aadhaar Letter (paper), PVC Aadhaar card, e\u2011Aadhaar, and the mAadhaar mobile app. All are considered equally valid ."
+      },
+      {
+        "question": "What is a PVC Aadhaar card?",
+        "answer": "A PVC Aadhaar card is a durable plastic card ordered online. It includes advanced security features and is as valid as the letter ."
+      },
+      {
+        "question": "How long does it take to get Aadhaar after enrolment?",
+        "answer": "It can take up to 90 days from the date of enrolment to generate and dispatch the Aadhaar letter by post ."
+      },
+      {
+        "question": "How long do updates to Aadhaar take?",
+        "answer": "Demographic or biometric updates may take up to 90 days from the request date to reflect in the system ."
+      },
+      {
+        "question": "How do I update details like address or name?",
+        "answer": "You can update details online via SSUP for demographic changes (with scanned docs). Biometric or mobile updates require a visit to an enrolment centre ."
+      },
+      {
+        "question": "How can I update my Aadhaar-linked mobile number?",
+        "answer": "Mobile number can only be updated at a nearby enrolment centre. Online update is not available, though you can book an appointment online ."
+      },
+      {
+        "question": "What is masked Aadhaar?",
+        "answer": "Masked Aadhaar hides the first 8 digits of your Aadhaar number, showing only the last 4 digits. It is acceptable for most e\u2011KYC purposes ."
+      },
+      {
+        "question": "Can private companies store my VID?",
+        "answer": "No. VID is temporary by design and cannot be stored. Only your consent allows authentication, and agencies aren't permitted to retain your VID ."
+      },
+      {
+        "question": "Does updating my Aadhaar share info with banks or mobile companies?",
+        "answer": "No. UIDAI only receives authentication requests and returns 'Yes' or 'No'. KYC providers only get basic info like name or address, not your bank or account details ."
+      },
+      {
+        "question": "How can I check the status of my Aadhaar update or enrolment?",
+        "answer": "Use the UIDAI portal (Check Aadhaar Status) or download e\u2011Aadhaar. You can also contact the helpline (1947) for updates ."
+      }
     ]
   },
   {
     "section": "PAN Card",
     "faqs": [
-      {"question": "How to apply for PAN card?", "answer": "You can apply for a PAN card online at tin-nsdl.com or at a PAN center."},
-      {"question": "How to link PAN with Aadhar?", "answer": "You can link your PAN with Aadhar on the income tax e-filing portal."}
-      ,{
+      {
+        "question": "How to apply for PAN card?",
+        "answer": "You can apply for a PAN card online at tin-nsdl.com or at a PAN center."
+      },
+      {
+        "question": "How to link PAN with Aadhar?",
+        "answer": "You can link your PAN with Aadhar on the income tax e-filing portal."
+      },
+      {
         "question": "What is PAN?",
         "answer": "PAN (Permanent Account Number) is a ten-digit alphanumeric number issued by the Income Tax Department to any 'person' who applies for it or to whom the department allots the number."
       },
@@ -112,8 +172,14 @@
   {
     "section": "Voter Card",
     "faqs": [
-      {"question": "How to register for a Voter ID?", "answer": "You can register for a Voter ID online at nvsp.in or at your local election office."},
-      {"question": "How to update address in Voter ID?", "answer": "Submit Form 8 online at nvsp.in or visit your local election office."},
+      {
+        "question": "How to register for a Voter ID?",
+        "answer": "You can register for a Voter ID online at nvsp.in or at your local election office."
+      },
+      {
+        "question": "How to update address in Voter ID?",
+        "answer": "Submit Form 8 online at nvsp.in or visit your local election office."
+      },
       {
         "question": "What is a Voter ID card?",
         "answer": "A Voter ID card is an identity document issued by the Election Commission of India to eligible citizens to enable them to vote in elections."
@@ -199,11 +265,27 @@
   {
     "section": "Common Questions",
     "faqs": [
-      {"question": "What are the working hours of government offices?", "answer": "Most government offices are open from 9:00 AM to 5:00 PM, Monday to Friday."},
-      {"question": "How can I file a complaint?", "answer": "You can file a complaint through the official government portal or visit your local office."},
-      {"question": "Where can I find government forms?", "answer": "Government forms are available on the respective department's website or at the office."},
-      {"question": "How do I check the status of my application?", "answer": "You can check the status of your application online using your application number on the relevant department's portal."},
-      {"question": "How to contact customer support?", "answer": "You can contact customer support through the helpline number provided on the official website."},{
+      {
+        "question": "What are the working hours of government offices?",
+        "answer": "Most government offices are open from 9:00 AM to 5:00 PM, Monday to Friday."
+      },
+      {
+        "question": "How can I file a complaint?",
+        "answer": "You can file a complaint through the official government portal or visit your local office."
+      },
+      {
+        "question": "Where can I find government forms?",
+        "answer": "Government forms are available on the respective department's website or at the office."
+      },
+      {
+        "question": "How do I check the status of my application?",
+        "answer": "You can check the status of your application online using your application number on the relevant department's portal."
+      },
+      {
+        "question": "How to contact customer support?",
+        "answer": "You can contact customer support through the helpline number provided on the official website."
+      },
+      {
         "question": "What is a birth certificate and how can I obtain one?",
         "answer": "A birth certificate is an official document recording a person's birth. You can obtain it from your local municipal office or online through the state government portal."
       },
@@ -217,7 +299,7 @@
       },
       {
         "question": "What is an income certificate and why is it needed?",
-        "answer": "An income certificate is issued by the government to certify a person’s income from all sources. It is often required for scholarships, government schemes, and reservations."
+        "answer": "An income certificate is issued by the government to certify a person\u2019s income from all sources. It is often required for scholarships, government schemes, and reservations."
       },
       {
         "question": "How do I apply for a caste certificate?",
@@ -225,11 +307,11 @@
       },
       {
         "question": "How can I pay property tax?",
-        "answer": "Property tax can be paid at your local municipal office or online through the municipal corporation’s website."
+        "answer": "Property tax can be paid at your local municipal office or online through the municipal corporation\u2019s website."
       },
       {
         "question": "How do I register a complaint about civic issues (like roads, water, sanitation)?",
-        "answer": "You can register complaints through your municipal corporation’s helpline, website, or mobile app."
+        "answer": "You can register complaints through your municipal corporation\u2019s helpline, website, or mobile app."
       },
       {
         "question": "How can I get a driving license?",
@@ -242,6 +324,7 @@
       {
         "question": "How can I access government welfare schemes?",
         "answer": "Information about government welfare schemes is available on official government portals, and you can apply online or at the relevant government office."
-      }]
+      }
+    ]
   }
 ]

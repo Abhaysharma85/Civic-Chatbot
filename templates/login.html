@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg">
+    <style>
+        /* Live animated gradient for header buttons */
+        .live-gradient {
+            background: linear-gradient(270deg, #2563eb, #f59e42, #22c55e, #2563eb);
+            background-size: 600% 600%;
+            animation: gradientMove 6s ease-in-out infinite;
+        }
+        @keyframes gradientMove {
+            0% {background-position:0% 50%}
+            50% {background-position:100% 50%}
+            100% {background-position:0% 50%}
+        }
+        /* Static gradient image background */
+        body {
+            min-height: 100vh;
+            background: url('/static/gradient-bg.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col overflow-hidden">
+    <!-- Modern Animated Background (blobs) - covers full viewport -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 w-full h-full overflow-hidden">
+            <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-br from-blue-900 via-blue-600 to-orange-300 opacity-60 blur-3xl animate-blob1"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-green-200 via-orange-400 to-blue-600 opacity-50 blur-3xl animate-blob2"></div>
+            <div class="absolute top-[30%] left-[50%] w-[30vw] h-[30vw] rounded-full bg-gradient-to-tl from-orange-300 via-white to-green-500 opacity-40 blur-2xl animate-blob3"></div>
+        </div>
+        <style>
+            @keyframes blob1 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(10vw, 5vw) scale(1.1);}
+                66% { transform: translate(-5vw, 10vw) scale(0.95);}
+            }
+            @keyframes blob2 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(-8vw, -4vw) scale(1.05);}
+                66% { transform: translate(6vw, 8vw) scale(1.15);}
+            }
+            @keyframes blob3 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(-6vw, 6vw) scale(1.08);}
+                66% { transform: translate(8vw, -8vw) scale(0.92);}
+            }
+            .animate-blob1 { animation: blob1 18s ease-in-out infinite; }
+            .animate-blob2 { animation: blob2 22s ease-in-out infinite; }
+            .animate-blob3 { animation: blob3 20s ease-in-out infinite; }
+        </style>
+    </div>
+    <!-- Header: Consistent with chat.html -->
+    <header class="bg-blue-900 text-white py-4 shadow-lg relative z-10">
+        <div class="max-w-5xl mx-auto flex items-center gap-6 px-4 justify-between">
+            <div class="flex items-center gap-4 min-w-0">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-12 h-12 rounded-full shadow-md flex-shrink-0" aria-label="Government Emblem">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-3 min-w-0">
+                    <span class="text-2xl sm:text-3xl font-bold tracking-wide truncate">Government Civic Chatbot</span>
+                    <span class="text-blue-100 text-sm truncate">Admin Login</span>
+                </div>
+            </div>
+            <div class="flex gap-2 ml-auto">
+                <a href="/" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Home</a>
+            </div>
+        </div>
+    </header>
+    <!-- Centered Login Form -->
+    <main class="flex-1 flex items-center justify-center relative z-10">
+        <div class="bg-white/90 p-8 rounded-2xl shadow-2xl w-full max-w-sm mt-8">
+            <h2 class="text-2xl font-bold mb-6 text-center text-blue-900">Admin Login</h2>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="mb-4 text-red-600">{{ messages[0] }}</div>
+              {% endif %}
+            {% endwith %}
+            <form method="POST">
+                <div class="mb-4">
+                    <label class="block mb-2 text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" name="password" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-900 text-white py-2 rounded hover:bg-blue-800">Login</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html> 
