@@ -90,6 +90,17 @@
         #darkModeToggle:focus + .toggle-track {
             box-shadow: 0 0 0 2px #2563eb44;
         }
+        /* Splash screen animated gradient */
+        #splash {
+            background: linear-gradient(270deg, #2563eb, #f59e42, #22c55e, #2563eb);
+            background-size: 600% 600%;
+            animation: splashGradientMove 4s ease-in-out infinite;
+        }
+        @keyframes splashGradientMove {
+            0% {background-position:0% 50%}
+            50% {background-position:100% 50%}
+            100% {background-position:0% 50%}
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-100 via-white to-green-100 min-h-screen flex flex-col overflow-hidden">
