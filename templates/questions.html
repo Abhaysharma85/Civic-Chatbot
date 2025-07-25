@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Questions - Government Civic Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg">
+    <style>
+        .live-gradient {
+            background: linear-gradient(270deg, #2563eb, #f59e42, #22c55e, #2563eb);
+            background-size: 600% 600%;
+            animation: gradientMove 6s ease-in-out infinite;
+        }
+        @keyframes gradientMove {
+            0% {background-position:0% 50%}
+            50% {background-position:100% 50%}
+            100% {background-position:0% 50%}
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-100 via-white to-green-100 min-h-screen flex flex-col overflow-hidden">
+    <!-- Animated Blobs Background -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 w-full h-full overflow-hidden">
+            <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-br from-blue-900 via-blue-600 to-orange-300 opacity-60 blur-3xl animate-blob1"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-green-200 via-orange-400 to-blue-600 opacity-50 blur-3xl animate-blob2"></div>
+            <div class="absolute top-[30%] left-[50%] w-[30vw] h-[30vw] rounded-full bg-gradient-to-tl from-orange-300 via-white to-green-500 opacity-40 blur-2xl animate-blob3"></div>
+        </div>
+        <style>
+            @keyframes blob1 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(10vw, 5vw) scale(1.1);}
+                66% { transform: translate(-5vw, 10vw) scale(0.95);}
+            }
+            @keyframes blob2 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(-8vw, -4vw) scale(1.05);}
+                66% { transform: translate(6vw, 8vw) scale(1.15);}
+            }
+            @keyframes blob3 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(-6vw, 6vw) scale(1.08);}
+                66% { transform: translate(8vw, -8vw) scale(0.92);}
+            }
+            .animate-blob1 { animation: blob1 18s ease-in-out infinite; }
+            .animate-blob2 { animation: blob2 22s ease-in-out infinite; }
+            .animate-blob3 { animation: blob3 20s ease-in-out infinite; }
+        </style>
+    </div>
+    <!-- Header -->
+    <header class="bg-blue-900 text-white py-4 shadow-lg relative z-10">
+        <div class="max-w-5xl mx-auto flex items-center gap-6 px-4 justify-between">
+            <div class="flex items-center gap-4 min-w-0">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-12 h-12 rounded-full shadow-md flex-shrink-0" aria-label="Government Emblem">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-3 min-w-0">
+                    <span class="text-2xl sm:text-3xl font-bold tracking-wide truncate">Government Civic Chatbot</span>
+                    <span class="text-blue-100 text-sm truncate">All Questions</span>
+                </div>
+            </div>
+            <div class="flex gap-2 ml-auto">
+                <a href="/" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Home</a>
+            </div>
+        </div>
+    </header>
+    <!-- Questions List -->
+    <main class="flex-1 flex flex-col items-center justify-start relative z-10 px-4 py-8">
+        <div class="w-full max-w-3xl bg-white/90 rounded-2xl shadow-2xl p-8 overflow-y-auto" style="max-height: 70vh;">
+            <h2 class="text-2xl font-bold text-blue-900 mb-6 text-center">Frequently Asked Questions</h2>
+            {% for section in sections %}
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-orange-600 mb-3">{{ section.section }}</h3>
+                    <ul class="space-y-3">
+                        {% for faq in section.faqs %}
+                        <li class="border rounded-full p-4 bg-blue-50 hover:bg-orange-50 transition flex items-center justify-between gap-4">
+                            <span class="font-medium text-blue-900">Q:</span> <span class="flex-1 ml-2">{{ faq.question }}</span>
+                            <button class="copy-btn bg-green-500 hover:bg-green-600 text-white rounded-full px-4 py-2 transition focus:outline-none focus:ring" data-question="{{ faq.question }}" title="Copy question">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2zm0 0v2a2 2 0 002 2h4a2 2 0 002-2v-2" /></svg>
+                            </button>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+    <script>
+        // Copy button logic
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.copy-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const text = btn.getAttribute('data-question');
+                    navigator.clipboard.writeText(text).then(function() {
+                        btn.textContent = 'Copied!';
+                        setTimeout(() => {
+                            btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2zm0 0v2a2 2 0 002 2h4a2 2 0 002-2v-2" /></svg>';
+                        }, 1000);
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
