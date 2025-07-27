@@ -1,2 +1,5 @@
 Flask
-rapidfuzz 
+rapidfuzz
+requests
+python-dotenv
+google-generativeai 
