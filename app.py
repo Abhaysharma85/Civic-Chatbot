@@ -4,6 +4,10 @@ import os
 from functools import wraps
 import secrets
 from rapidfuzz import fuzz, process
+import google.generativeai as genai
+from dotenv import load_dotenv
+load_dotenv()
+import requests
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
@@ -11,7 +15,7 @@ FAQ_FILE = 'faqs.json'
 
 # Use a secure random secret key for session management
 app.secret_key = secrets.token_hex(32)
-ADMIN_PASSWORD = 'abhay'  # Change this to your desired admin password
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD')
 
 def load_faqs():
     # Load FAQs as a list of sections, each with a name and faqs array
@@ -42,6 +46,35 @@ def find_answer(question, sections, threshold=70):
         return candidates[idx][1]
     return "Sorry, I don't know the answer to that."
 
+def gemini_flash_response(user_input):
+    api_key = os.environ.get("GEMINI_API_KEY")
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+    headers = {"Content-Type": "application/json"}
+    # Prepend instruction to the user input
+    prompt = (
+        "Please answer the following question in a single paragraph of about 40 to 50 words, "
+        "and then provide a concise list of the most important steps related to the answer. "
+        "\nQuestion: " + user_input
+    )
+    data = {
+        "contents": [
+            {
+                "parts": [
+                    {"text": prompt}
+                ]
+            }
+        ]
+    }
+    resp = requests.post(url, headers=headers, json=data)
+    if resp.ok:
+        result = resp.json()
+        try:
+            return result["candidates"][0]["content"]["parts"][0]["text"]
+        except Exception:
+            return str(result)
+    else:
+        return f"Error from Gemini API: {resp.text}"
+
 @app.route('/')
 def index():
     return render_template('chat.html')
@@ -51,6 +84,16 @@ def chat():
     user_input = request.form['question']
     sections = load_faqs()
     answer = find_answer(user_input, sections)
+    # If FAQ has a real answer, return it
+    if answer != "Sorry, I don't know the answer to that.":
+        return jsonify({'answer': answer})
+    # If not, check for card-related keywords
+    keywords = ['aadhaar', 'adhar', 'pan card', 'voter card']
+    user_input_lower = user_input.lower()
+    if any(keyword in user_input_lower for keyword in keywords):
+        gemini_answer = gemini_flash_response(user_input)
+        return jsonify({'answer': gemini_answer})
+    # Otherwise, return the default FAQ not found response
     return jsonify({'answer': answer})
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -144,6 +187,17 @@ def get_sections():
 def questions():
     sections = load_faqs()
     return render_template('questions.html', sections=sections)
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message = request.form.get('message')
+        # Here you could add logic to store or send the message
+        flash('Thank you for contacting us! We have received your message.', 'success')
+        return redirect(url_for('contact'))
+    return render_template('contact.html')
 
 if __name__ == '__main__':
     app.run(debug=True) 
