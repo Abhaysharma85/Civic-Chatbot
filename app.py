@@ -54,6 +54,7 @@ def gemini_flash_response(user_input):
     prompt = (
         "Please answer the following question in a single paragraph of about 40 to 50 words, "
         "and then provide a concise list of the most important steps related to the answer. "
+        "Provide links available "
         "\nQuestion: " + user_input
     )
     data = {

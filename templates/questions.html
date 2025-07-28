@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Questions - Government Civic Chatbot</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg">
@@ -29,90 +30,153 @@
             border-color: #ea580c;
             transform: scale(1.07) rotate(-1deg);
         }
+        
+        /* Mobile responsive blob animations */
+        @keyframes blob1 {
+            0%,100% { transform: translate(0,0) scale(1);}
+            33% { transform: translate(10vw, 5vw) scale(1.1);}
+            66% { transform: translate(-5vw, 10vw) scale(0.95);}
+        }
+        @keyframes blob2 {
+            0%,100% { transform: translate(0,0) scale(1);}
+            33% { transform: translate(-8vw, -4vw) scale(1.05);}
+            66% { transform: translate(6vw, 8vw) scale(1.15);}
+        }
+        @keyframes blob3 {
+            0%,100% { transform: translate(0,0) scale(1);}
+            33% { transform: translate(-6vw, 6vw) scale(1.08);}
+            66% { transform: translate(8vw, -8vw) scale(0.92);}
+        }
+        .animate-blob1 { animation: blob1 18s ease-in-out infinite; }
+        .animate-blob2 { animation: blob2 22s ease-in-out infinite; }
+        .animate-blob3 { animation: blob3 20s ease-in-out infinite; }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .live-gradient:hover, .contact-advanced-btn:hover {
+                transform: scale(1.02); /* Reduced hover scale for mobile */
+            }
+            
+            /* Smaller blob sizes on mobile for better performance */
+            .blob-mobile-1 { width: 60vw !important; height: 60vw !important; }
+            .blob-mobile-2 { width: 65vw !important; height: 65vw !important; }
+            .blob-mobile-3 { width: 50vw !important; height: 50vw !important; }
+            
+            /* Mobile-specific content adjustments */
+            .questions-container {
+                max-height: calc(100vh - 200px) !important;
+                margin-top: 1rem !important;
+            }
+        }
+        
+        /* Ensure proper touch targets on mobile */
+        @media (max-width: 640px) {
+            button, .live-gradient, .copy-btn {
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-100 via-white to-green-100 min-h-screen flex flex-col overflow-hidden">
     <!-- Animated Blobs Background -->
     <div class="fixed inset-0 z-0 pointer-events-none">
         <div class="absolute inset-0 w-full h-full overflow-hidden">
-            <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-br from-blue-900 via-blue-600 to-orange-300 opacity-60 blur-3xl animate-blob1"></div>
-            <div class="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-green-200 via-orange-400 to-blue-600 opacity-50 blur-3xl animate-blob2"></div>
-            <div class="absolute top-[30%] left-[50%] w-[30vw] h-[30vw] rounded-full bg-gradient-to-tl from-orange-300 via-white to-green-500 opacity-40 blur-2xl animate-blob3"></div>
+            <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] md:w-[40vw] md:h-[40vw] blob-mobile-1 rounded-full bg-gradient-to-br from-blue-900 via-blue-600 to-orange-300 opacity-60 blur-3xl animate-blob1"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] md:w-[45vw] md:h-[45vw] blob-mobile-2 rounded-full bg-gradient-to-tr from-green-200 via-orange-400 to-blue-600 opacity-50 blur-3xl animate-blob2"></div>
+            <div class="absolute top-[30%] left-[50%] w-[30vw] h-[30vw] md:w-[30vw] md:h-[30vw] blob-mobile-3 rounded-full bg-gradient-to-tl from-orange-300 via-white to-green-500 opacity-40 blur-2xl animate-blob3"></div>
         </div>
-        <style>
-            @keyframes blob1 {
-                0%,100% { transform: translate(0,0) scale(1);}
-                33% { transform: translate(10vw, 5vw) scale(1.1);}
-                66% { transform: translate(-5vw, 10vw) scale(0.95);}
-            }
-            @keyframes blob2 {
-                0%,100% { transform: translate(0,0) scale(1);}
-                33% { transform: translate(-8vw, -4vw) scale(1.05);}
-                66% { transform: translate(6vw, 8vw) scale(1.15);}
-            }
-            @keyframes blob3 {
-                0%,100% { transform: translate(0,0) scale(1);}
-                33% { transform: translate(-6vw, 6vw) scale(1.08);}
-                66% { transform: translate(8vw, -8vw) scale(0.92);}
-            }
-            .animate-blob1 { animation: blob1 18s ease-in-out infinite; }
-            .animate-blob2 { animation: blob2 22s ease-in-out infinite; }
-            .animate-blob3 { animation: blob3 20s ease-in-out infinite; }
-        </style>
     </div>
-    <!-- Header -->
-    <header class="bg-blue-900 text-white py-4 shadow-lg relative z-10">
-        <div class="max-w-5xl mx-auto flex items-center gap-6 px-4 justify-between">
-            <div class="flex items-center gap-4 min-w-0">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-12 h-12 rounded-full shadow-md flex-shrink-0" aria-label="Government Emblem">
-                <div class="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-3 min-w-0">
-                    <span class="text-2xl sm:text-3xl font-bold tracking-wide truncate">Government Civic Chatbot</span>
-                    
+    
+    <!-- Header: Responsive design -->
+    <header class="bg-blue-900 text-white py-3 md:py-4 shadow-lg relative z-10">
+        <div class="max-w-5xl mx-auto px-4">
+            <!-- Mobile Header Layout -->
+            <div class="flex flex-col space-y-3 md:hidden">
+                <!-- Top row: Logo and title -->
+                <div class="flex items-center gap-3">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-10 h-10 rounded-full shadow-md flex-shrink-0" aria-label="Government Emblem">
+                    <div class="min-w-0 flex-1">
+                        <span class="text-lg font-bold tracking-wide truncate block">Government Civic Chatbot</span>
+                    </div>
+                </div>
+                <!-- Bottom row: Navigation buttons -->
+                <div class="flex gap-2 justify-center">
+                    <a href="/" class="live-gradient text-white font-semibold px-4 py-2 rounded shadow hover:brightness-110 transition text-sm">Home</a>
+                    <a href="/questions" class="live-gradient text-white font-semibold px-4 py-2 rounded shadow hover:scale-105 transition border-2 border-orange-400 shadow-lg text-sm">Questions</a>
                 </div>
             </div>
-            <div class="flex gap-2 ml-auto">
-                <a href="/" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Home</a>
-                <a href="/questions" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:scale-105 transition border-2 border-orange-400 shadow-lg">Questions</a>
-                <!-- <a href="/contact" class="contact-advanced-btn font-semibold px-5 py-2 rounded shadow-lg border-2 border-green-400 bg-gradient-to-r from-green-400 via-blue-400 to-orange-300 text-white hover:scale-110 hover:from-green-500 hover:to-orange-400 transition-all duration-300">Contact</a> -->
+            
+            <!-- Desktop Header Layout -->
+            <div class="hidden md:flex items-center gap-6 justify-between">
+                <div class="flex items-center gap-4 min-w-0">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-12 h-12 rounded-full shadow-md flex-shrink-0" aria-label="Government Emblem">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-3 min-w-0">
+                        <span class="text-2xl sm:text-3xl font-bold tracking-wide truncate">Government Civic Chatbot</span>
+                    </div>
+                </div>
+                <div class="flex gap-2 ml-auto">
+                    <a href="/" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Home</a>
+                    <a href="/questions" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:scale-105 transition border-2 border-orange-400 shadow-lg">Questions</a>
+                </div>
             </div>
         </div>
     </header>
+    
     <!-- Questions List -->
-    <main class="flex-1 flex flex-col items-center justify-start relative z-10 px-4 py-8 mt-12">
-        <div class="w-full max-w-3xl bg-white/90 rounded-2xl shadow-2xl p-8 overflow-y-auto" style="max-height: 70vh;">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
-                <h2 class="text-2xl font-bold text-blue-900 text-center sm:text-left">Frequently Asked Questions</h2>
+    <main class="flex-1 flex flex-col items-center justify-start relative z-10 px-2 md:px-4 py-4 md:py-8 mt-4 md:mt-12">
+        <div class="w-full max-w-4xl bg-white/90 rounded-2xl shadow-2xl p-4 md:p-8 overflow-y-auto questions-container" style="max-height: 75vh;">
+            <!-- Header Section -->
+            <div class="flex flex-col gap-4 mb-6">
+                <h2 class="text-xl md:text-2xl font-bold text-blue-900 text-center">Frequently Asked Questions</h2>
                 
-            </div>
-            <div class="mb-8 flex items-center gap-2">
-                <label for="category-select" class="mr-2 font-semibold text-blue-900">Filter by Category:</label>
-                <select id="category-select" class="w-full px-4 py-2 rounded-full border border-blue-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition shadow-sm">
-                    <option value="all">All Categories</option>
-                    {% for section in sections %}
-                        <option value="{{ section.section }}">{{ section.section }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            {% for section in sections %}
-                <div class="mb-10" data-section-name="{{ section.section }}">
-                    <h3 class="text-xl font-semibold text-orange-600 mb-4">{{ section.section }}</h3>
-                    <ul class="grid gap-4 sm:grid-cols-2">
-                        {% for faq in section.faqs %}
-                        <li class="border border-blue-200 rounded-2xl p-5 bg-blue-50 hover:bg-orange-50 transition flex items-center gap-3 shadow-sm mb-2">
-                            <div class="flex items-start gap-2 flex-1">
-                                <span class="font-bold text-blue-700">Q:</span>
-                                <span class="flex-1 text-blue-900">{{ faq.question }}</span>
-                            </div>
-                            <button class="copy-btn bg-green-500 hover:bg-green-600 text-white rounded-full px-3 py-1.5 transition focus:outline-none focus:ring ml-2 flex-shrink-0" data-question="{{ faq.question }}" title="Copy question">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2zm0 0v2a2 2 0 002 2h4a2 2 0 002-2v-2" /></svg>
-                            </button>
-                        </li>
+                <!-- Category Filter -->
+                <div class="flex flex-col sm:flex-row sm:items-center gap-2">
+                    <label for="category-select" class="font-semibold text-blue-900 text-sm md:text-base">Filter by Category:</label>
+                    <select id="category-select" class="flex-1 px-3 py-2 md:px-4 md:py-2 rounded-full border border-blue-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 outline-none transition shadow-sm text-sm md:text-base">
+                        <option value="all">All Categories</option>
+                        {% for section in sections %}
+                            <option value="{{ section.section }}">{{ section.section }}</option>
                         {% endfor %}
-                    </ul>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- FAQ Sections -->
+            {% for section in sections %}
+                <div class="mb-8 md:mb-10" data-section-name="{{ section.section }}">
+                    <h3 class="text-lg md:text-xl font-semibold text-orange-600 mb-4">{{ section.section }}</h3>
+                    
+                    <!-- Mobile: Stack layout, Desktop: Grid layout -->
+                    <div class="flex flex-col md:grid md:gap-4 md:grid-cols-1 lg:grid-cols-2 space-y-3 md:space-y-0">
+                        {% for faq in section.faqs %}
+                        <div class="border border-blue-200 rounded-2xl p-4 md:p-5 bg-blue-50 hover:bg-orange-50 transition shadow-sm">
+                            <!-- Mobile: Stacked layout -->
+                            <div class="flex flex-col md:flex-row md:items-center gap-3">
+                                <!-- Question section -->
+                                <div class="flex items-start gap-2 flex-1 min-w-0">
+                                    <span class="font-bold text-blue-700 flex-shrink-0">Q:</span>
+                                    <span class="flex-1 text-blue-900 text-sm md:text-base leading-relaxed">{{ faq.question }}</span>
+                                </div>
+                                
+                                <!-- Copy button -->
+                                <button class="copy-btn bg-green-500 hover:bg-green-600 text-white rounded-full px-3 py-2 md:px-3 md:py-1.5 transition focus:outline-none focus:ring flex-shrink-0 self-start md:self-center" 
+                                        data-question="{{ faq.question }}" 
+                                        title="Copy question"
+                                        aria-label="Copy question to clipboard">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2zm0 0v2a2 2 0 002 2h4a2 2 0 002-2v-2" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             {% endfor %}
         </div>
     </main>
+    
     <script>
         // Copy button logic
         document.addEventListener('DOMContentLoaded', function() {
@@ -120,9 +184,28 @@
                 btn.addEventListener('click', function() {
                     const text = btn.getAttribute('data-question');
                     navigator.clipboard.writeText(text).then(function() {
+                        const originalContent = btn.innerHTML;
                         btn.textContent = 'Copied!';
+                        btn.classList.add('bg-green-600');
                         setTimeout(() => {
-                            btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8a2 2 0 002-2V8a2 2 0 00-2-2H8a2 2 0 00-2 2v6a2 2 0 002 2zm0 0v2a2 2 0 002 2h4a2 2 0 002-2v-2" /></svg>';
+                            btn.innerHTML = originalContent;
+                            btn.classList.remove('bg-green-600');
+                        }, 1000);
+                    }).catch(function() {
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = text;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        
+                        const originalContent = btn.innerHTML;
+                        btn.textContent = 'Copied!';
+                        btn.classList.add('bg-green-600');
+                        setTimeout(() => {
+                            btn.innerHTML = originalContent;
+                            btn.classList.remove('bg-green-600');
                         }, 1000);
                     });
                 });
@@ -151,4 +234,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

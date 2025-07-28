@@ -2,76 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin FAQ Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
 </head>
 <body class="bg-gradient-to-br from-blue-100 to-blue-300 min-h-screen flex flex-col">
     <!-- Header -->
-    <header class="bg-blue-800 text-white py-6 shadow-lg">
-        <div class="max-w-4xl mx-auto flex items-center gap-4 px-4">
-            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Civic Icon" class="w-12 h-12 rounded-full shadow-md">
+    <header class="bg-blue-800 text-white py-4 md:py-6 shadow-lg">
+        <div class="max-w-4xl mx-auto flex items-center gap-3 md:gap-4 px-4">
+            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Civic Icon" class="w-10 h-10 md:w-12 md:h-12 rounded-full shadow-md">
             <div>
-                <h1 class="text-3xl font-bold tracking-wide">Civic Chatbot Admin</h1>
-                <p class="text-blue-100 text-sm">Manage your civic FAQ knowledge base</p>
+                <h1 class="text-xl md:text-3xl font-bold tracking-wide">Civic Chatbot Admin</h1>
+                <p class="text-blue-100 text-xs md:text-sm">Manage your civic FAQ knowledge base</p>
             </div>
         </div>
     </header>
+    
     <!-- Main Content -->
     <main class="flex-1 flex flex-col items-center justify-start">
-        <div class="w-full max-w-4xl mt-8 bg-white/90 p-8 rounded-2xl shadow-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-semibold text-blue-800">FAQ Dashboard</h2>
-                <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Logout</a>
+        <div class="w-full max-w-4xl mt-4 md:mt-8 bg-white/90 p-4 md:p-8 rounded-2xl shadow-2xl mx-4">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+                <h2 class="text-xl md:text-2xl font-semibold text-blue-800">FAQ Dashboard</h2>
+                <a href="/logout" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 text-center">Logout</a>
             </div>
+            
             <!-- Add FAQ Button and Search -->
-            <div class="mb-6 flex flex-col sm:flex-row gap-4 items-center">
-                <input id="search" type="text" placeholder="Search FAQs..." class="flex-1 px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
+            <div class="mb-6 flex flex-col gap-4">
+                <input id="search" type="text" placeholder="Search FAQs..." class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
                 <button onclick="openModal()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Add FAQ</button>
             </div>
+            
             <!-- FAQ Sections -->
-            <div class="overflow-x-auto">
+            <div class="space-y-6 md:space-y-8">
                 {% for section in sections %}
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold text-blue-700 mb-2">{{ section.section }}</h3>
-                    <table class="min-w-full bg-white rounded shadow mb-2" id="faq-table-{{ section.section }}">
-                        <thead>
-                            <tr>
-                                <th class="py-2 px-4 border-b">#</th>
-                                <th class="py-2 px-4 border-b">Question</th>
-                                <th class="py-2 px-4 border-b">Answer</th>
-                                <th class="py-2 px-4 border-b">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="faq-body-{{ section.section }}">
-                            {% for faq in section.faqs %}
-                            <tr class="border-b faq-row">
-                                <!-- Edit FAQ Form -->
-                                <form method="POST" action="/admin/edit/{{ section.section }}/{{ loop.index0 }}" class="contents">
-                                    <td class="py-2 px-4">{{ loop.index }}</td>
-                                    <td class="py-2 px-4"><input type="text" name="question" value="{{ faq.question }}" required class="w-full px-2 py-1 border rounded"></td>
-                                    <td class="py-2 px-4"><input type="text" name="answer" value="{{ faq.answer }}" required class="w-full px-2 py-1 border rounded"></td>
-                                    <td class="py-2 px-4 flex gap-2">
-                                        <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Save</button>
+                <div class="mb-6 md:mb-8">
+                    <h3 class="text-lg md:text-xl font-bold text-blue-700 mb-4">{{ section.section }}</h3>
+                    
+                    <!-- Mobile Card View -->
+                    <div class="block md:hidden space-y-4" id="faq-cards-{{ section.section }}">
+                        {% for faq in section.faqs %}
+                        <div class="bg-white rounded-lg shadow-md p-4 border faq-row">
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm font-semibold">#{{ loop.index }}</span>
+                                <div class="flex gap-2">
+                                    <button onclick="toggleEdit(this)" class="bg-yellow-500 text-white px-2 py-1 rounded text-xs hover:bg-yellow-600">Edit</button>
+                                    <form method="POST" action="/admin/delete/{{ section.section }}/{{ loop.index0 }}" onsubmit="return confirm('Delete this FAQ?')" class="inline">
+                                        <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded text-xs hover:bg-red-600">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <!-- View Mode -->
+                            <div class="view-mode">
+                                <div class="mb-3">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Question:</label>
+                                    <p class="text-gray-900 bg-gray-50 p-2 rounded">{{ faq.question }}</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Answer:</label>
+                                    <p class="text-gray-900 bg-gray-50 p-2 rounded">{{ faq.answer }}</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Edit Mode -->
+                            <div class="edit-mode hidden">
+                                <form method="POST" action="/admin/edit/{{ section.section }}/{{ loop.index0 }}">
+                                    <div class="mb-3">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Question:</label>
+                                        <input type="text" name="question" value="{{ faq.question }}" required class="w-full px-2 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Answer:</label>
+                                        <textarea name="answer" required class="w-full px-2 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300 h-20">{{ faq.answer }}</textarea>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button type="submit" class="bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600 text-sm">Save</button>
+                                        <button type="button" onclick="toggleEdit(this)" class="bg-gray-500 text-white px-3 py-2 rounded hover:bg-gray-600 text-sm">Cancel</button>
+                                    </div>
                                 </form>
-                                <!-- Delete FAQ Form -->
-                                <form method="POST" action="/admin/delete/{{ section.section }}/{{ loop.index0 }}" onsubmit="return confirm('Delete this FAQ?')" class="inline">
-                                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
-                                </form>
-                                    </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Desktop Table View -->
+                    <div class="hidden md:block overflow-x-auto">
+                        <table class="min-w-full bg-white rounded shadow mb-2" id="faq-table-{{ section.section }}">
+                            <thead>
+                                <tr>
+                                    <th class="py-2 px-4 border-b">#</th>
+                                    <th class="py-2 px-4 border-b">Question</th>
+                                    <th class="py-2 px-4 border-b">Answer</th>
+                                    <th class="py-2 px-4 border-b">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="faq-body-{{ section.section }}">
+                                {% for faq in section.faqs %}
+                                <tr class="border-b faq-row">
+                                    <!-- Edit FAQ Form -->
+                                    <form method="POST" action="/admin/edit/{{ section.section }}/{{ loop.index0 }}" class="contents">
+                                        <td class="py-2 px-4">{{ loop.index }}</td>
+                                        <td class="py-2 px-4"><input type="text" name="question" value="{{ faq.question }}" required class="w-full px-2 py-1 border rounded"></td>
+                                        <td class="py-2 px-4"><input type="text" name="answer" value="{{ faq.answer }}" required class="w-full px-2 py-1 border rounded"></td>
+                                        <td class="py-2 px-4 flex gap-2">
+                                            <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Save</button>
+                                    </form>
+                                    <!-- Delete FAQ Form -->
+                                    <form method="POST" action="/admin/delete/{{ section.section }}/{{ loop.index0 }}" onsubmit="return confirm('Delete this FAQ?')" class="inline">
+                                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
+                                    </form>
+                                        </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
         </div>
+        
         <!-- Modal for adding FAQ -->
-        <div id="modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
-            <div class="bg-white p-8 rounded shadow-md w-full max-w-md relative">
-                <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700">&times;</button>
-                <h3 class="text-xl font-bold mb-4">Add New FAQ</h3>
+        <div id="modal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden p-4">
+            <div class="bg-white p-6 md:p-8 rounded shadow-md w-full max-w-md relative max-h-[90vh] overflow-y-auto">
+                <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+                <h3 class="text-lg md:text-xl font-bold mb-4">Add New FAQ</h3>
                 <!-- Add FAQ Form -->
                 <form method="POST" action="/admin/add" id="add-faq-form">
                     <div class="mb-4">
@@ -89,22 +145,25 @@
                     </div>
                     <div class="mb-4">
                         <label class="block mb-2 text-sm font-medium text-gray-700">Answer</label>
-                        <input type="text" name="answer" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300">
+                        <textarea name="answer" required class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300 h-24"></textarea>
                     </div>
                     <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Add FAQ</button>
                 </form>
             </div>
         </div>
+        
         <!-- Notification -->
-        <div id="notification" class="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg hidden"></div>
+        <div id="notification" class="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded shadow-lg hidden z-50"></div>
     </main>
+    
     <!-- Footer -->
     <footer class="bg-blue-900 text-blue-100 py-4 mt-8 shadow-inner">
-        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center px-4">
-            <span>&copy; 2024 Civic Chatbot Project</span>
-            <span>Empowering citizens with instant civic information</span>
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center px-4 text-center sm:text-left">
+            <span class="text-sm">&copy; 2024 Civic Chatbot Project</span>
+            <span class="text-sm mt-2 sm:mt-0">Empowering citizens with instant civic information</span>
         </div>
     </footer>
+    
     <script>
         // Modal logic
         function openModal() {
@@ -113,6 +172,22 @@
         function closeModal() {
             document.getElementById('modal').classList.add('hidden');
         }
+        
+        // Toggle edit mode for mobile cards
+        function toggleEdit(button) {
+            const card = button.closest('.faq-row');
+            const viewMode = card.querySelector('.view-mode');
+            const editMode = card.querySelector('.edit-mode');
+            
+            if (editMode.classList.contains('hidden')) {
+                viewMode.classList.add('hidden');
+                editMode.classList.remove('hidden');
+            } else {
+                viewMode.classList.remove('hidden');
+                editMode.classList.add('hidden');
+            }
+        }
+        
         // Notification logic
         function showNotification(msg) {
             const notif = document.getElementById('notification');
@@ -120,15 +195,36 @@
             notif.classList.remove('hidden');
             setTimeout(() => notif.classList.add('hidden'), 2000);
         }
+        
         // Search/filter logic
         document.getElementById('search').addEventListener('input', function() {
             const val = this.value.toLowerCase();
             document.querySelectorAll('.faq-row').forEach(row => {
-                const q = row.querySelector('input[name="question"]').value.toLowerCase();
-                const a = row.querySelector('input[name="answer"]').value.toLowerCase();
-                row.style.display = (q.includes(val) || a.includes(val)) ? '' : 'none';
+                let questionText, answerText;
+                
+                // Check if it's mobile card or desktop table row
+                const questionInput = row.querySelector('input[name="question"]');
+                const answerInput = row.querySelector('input[name="answer"]') || row.querySelector('textarea[name="answer"]');
+                const questionP = row.querySelector('.view-mode p');
+                
+                if (questionInput) {
+                    // Desktop table row
+                    questionText = questionInput.value.toLowerCase();
+                    answerText = answerInput.value.toLowerCase();
+                } else if (questionP) {
+                    // Mobile card view mode
+                    const allP = row.querySelectorAll('.view-mode p');
+                    questionText = allP[0] ? allP[0].textContent.toLowerCase() : '';
+                    answerText = allP[1] ? allP[1].textContent.toLowerCase() : '';
+                } else {
+                    questionText = '';
+                    answerText = '';
+                }
+                
+                row.style.display = (questionText.includes(val) || answerText.includes(val)) ? '' : 'none';
             });
         });
+        
         // Show notification on form submit (add/edit/delete)
         document.querySelectorAll('form').forEach(form => {
             form.addEventListener('submit', function() {
@@ -137,4 +233,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

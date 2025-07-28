@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contact Us - Government Civic Chatbot</title>
+    <title>Contact - Government Civic Chatbot</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg">
     <style>
-        .contact-gradient {
+        .live-gradient {
             background: linear-gradient(270deg, #2563eb, #f59e42, #22c55e, #2563eb);
             background-size: 600% 600%;
             animation: gradientMove 6s ease-in-out infinite;
@@ -16,65 +16,185 @@
             50% {background-position:100% 50%}
             100% {background-position:0% 50%}
         }
-        .contact-form-advanced {
-            box-shadow: 0 8px 32px 0 rgba(37,99,235,0.18), 0 1.5px 4px 0 rgba(34,197,94,0.10);
-            border-radius: 2rem;
-            background: rgba(255,255,255,0.95);
-            border: 2px solid #2563eb;
-        }
-        .contact-form-advanced input, .contact-form-advanced textarea {
-            border-radius: 1rem;
-            border: 1.5px solid #22c55e;
-            transition: border 0.2s;
-        }
-        .contact-form-advanced input:focus, .contact-form-advanced textarea:focus {
-            border-color: #f59e42;
-            outline: none;
-        }
-        .contact-btn {
+        .contact-advanced-btn {
             background: linear-gradient(90deg, #22c55e 0%, #2563eb 50%, #f59e42 100%);
-            color: white;
-            font-weight: 600;
-            border-radius: 1rem;
-            padding: 0.75rem 2.5rem;
-            border: none;
             box-shadow: 0 4px 20px 0 rgba(34,197,94,0.15), 0 1.5px 4px 0 rgba(37,99,235,0.10);
+            border: 2px solid #22c55e;
             transition: all 0.3s cubic-bezier(.4,2,.6,1);
+            letter-spacing: 0.5px;
         }
-        .contact-btn:hover {
+        .contact-advanced-btn:hover {
             background: linear-gradient(90deg, #16a34a 0%, #1d4ed8 50%, #ea580c 100%);
             box-shadow: 0 6px 24px 0 rgba(34,197,94,0.25), 0 2px 8px 0 rgba(37,99,235,0.15);
+            border-color: #ea580c;
             transform: scale(1.07) rotate(-1deg);
+        }
+        .developer-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-100 via-white to-green-100 min-h-screen flex flex-col overflow-hidden">
-    <header class="contact-gradient text-white py-4 shadow-lg relative z-10">
-        <div class="max-w-3xl mx-auto flex items-center gap-6 px-4 justify-between">
+<body class="bg-gradient-to-br from-blue-100 via-white to-green-100 min-h-screen flex flex-col">
+    <!-- Animated Blobs Background -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 w-full h-full overflow-hidden">
+            <div class="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-gradient-to-br from-blue-900 via-blue-600 to-orange-300 opacity-60 blur-3xl animate-blob1"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-gradient-to-tr from-green-200 via-orange-400 to-blue-600 opacity-50 blur-3xl animate-blob2"></div>
+            <div class="absolute top-[30%] left-[50%] w-[30vw] h-[30vw] rounded-full bg-gradient-to-tl from-orange-300 via-white to-green-500 opacity-40 blur-2xl animate-blob3"></div>
+        </div>
+        <style>
+            @keyframes blob1 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(10vw, 5vw) scale(1.1);}
+                66% { transform: translate(-5vw, 10vw) scale(0.95);}
+            }
+            @keyframes blob2 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(-8vw, -4vw) scale(1.05);}
+                66% { transform: translate(6vw, 8vw) scale(1.15);}
+            }
+            @keyframes blob3 {
+                0%,100% { transform: translate(0,0) scale(1);}
+                33% { transform: translate(-6vw, 6vw) scale(1.08);}
+                66% { transform: translate(8vw, -8vw) scale(0.92);}
+            }
+            .animate-blob1 { animation: blob1 18s ease-in-out infinite; }
+            .animate-blob2 { animation: blob2 22s ease-in-out infinite; }
+            .animate-blob3 { animation: blob3 20s ease-in-out infinite; }
+        </style>
+    </div>
+    
+    <!-- Header -->
+    <header class="bg-blue-900 text-white py-4 shadow-lg relative z-10">
+        <div class="max-w-5xl mx-auto flex items-center gap-6 px-4 justify-between">
             <div class="flex items-center gap-4 min-w-0">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg" alt="Government Emblem" class="w-12 h-12 rounded-full shadow-md flex-shrink-0" aria-label="Government Emblem">
-                <span class="text-2xl sm:text-3xl font-bold tracking-wide truncate">Contact Us</span>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-3 min-w-0">
+                    <span class="text-2xl sm:text-3xl font-bold tracking-wide truncate">Government Civic Chatbot</span>
+                </div>
             </div>
-            <a href="/" class="contact-btn">Back to Home</a>
+            <div class="flex gap-2 ml-auto">
+                <a href="/" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Home</a>
+                <a href="/questions" class="live-gradient text-white font-semibold px-5 py-2 rounded shadow hover:brightness-110 transition">Questions</a>
+                <a href="/contact" class="contact-advanced-btn font-semibold px-5 py-2 rounded shadow-lg text-white">Contact</a>
+            </div>
         </div>
     </header>
-    <main class="flex-1 flex flex-col items-center justify-center relative z-10 px-4 py-8 mt-8">
-        <form class="contact-form-advanced w-full max-w-lg p-10 mx-auto flex flex-col gap-6 shadow-2xl" method="post" action="#">
-            <h2 class="text-2xl font-bold text-blue-900 mb-2 text-center">We'd love to hear from you!</h2>
-            <div class="flex flex-col gap-2">
-                <label for="name" class="font-semibold text-blue-900">Name</label>
-                <input type="text" id="name" name="name" required class="px-4 py-2 text-lg" placeholder="Your Name">
+
+    <!-- Developer Info - Centered -->
+    <main class="flex-1 flex items-center justify-center relative z-10 px-4 py-8">
+        <div class="developer-card rounded-3xl shadow-2xl p-12 max-w-3xl w-full text-center">
+            
+
+            <!-- Developer Info -->
+            <h1 class="text-4xl font-bold text-blue-900 mb-3">Abhay Sharma</h1>
+            <p class="text-xl text-gray-600 mb-2">Fresher</p>
+            <p class="text-lg text-blue-700 mb-8">Government Civic Chatbot AI Powered</p>
+
+            <!-- Contact Info Grid -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <!-- Email -->
+                <div class="bg-blue-50 rounded-2xl p-6 hover:bg-blue-100 transition-colors">
+                    <div class="flex items-center justify-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-blue-900 mb-2">Email</h3>
+                    <p class="text-blue-700">as.developer.com@gmail.com</p>
+                </div>
+
+                <!-- Phone -->
+                <div class="bg-green-50 rounded-2xl p-6 hover:bg-green-100 transition-colors">
+                    <div class="flex items-center justify-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-green-900 mb-2">Phone</h3>
+                    <p class="text-green-700">+91-8530186173</p>
+                </div>
+
+                <!-- Location -->
+                <div class="bg-orange-50 rounded-2xl p-6 hover:bg-orange-100 transition-colors">
+                    <div class="flex items-center justify-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-orange-900 mb-2">Location</h3>
+                    <p class="text-orange-700">Nashik,Maharashtra, India</p>
+                </div>
+
+                <!-- GitHub/Portfolio -->
+                <div class="bg-purple-50 rounded-2xl p-6 hover:bg-purple-100 transition-colors">
+                    <div class="flex items-center justify-center gap-3 mb-3">
+                        <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-purple-900 mb-2">Portfolio</h3>
+                    <p class="text-purple-700">https://vercel.com/abhaysharma85s-projects/portfolio</p>
+                </div>
             </div>
-            <div class="flex flex-col gap-2">
-                <label for="email" class="font-semibold text-blue-900">Email</label>
-                <input type="email" id="email" name="email" required class="px-4 py-2 text-lg" placeholder="you@email.com">
+
+            <!-- About Section -->
+            <div class="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-8 mb-8">
+                <h3 class="text-xl font-semibold text-blue-900 mb-4">About the Developer</h3>
+                <p class="text-gray-700 leading-relaxed text-left">
+                    I am a passionate Fresher specializing in creating innovative  solutions. 
+                    This Civic Chatbot project aims to bridge the gap between citizens and government services by 
+                    providing quick, accurate, and accessible information about various civic processes and procedures. 
+                    My goal is to make government services more transparent and user-friendly for all citizens.
+                </p>
             </div>
-            <div class="flex flex-col gap-2">
-                <label for="message" class="font-semibold text-blue-900">Message</label>
-                <textarea id="message" name="message" rows="5" required class="px-4 py-2 text-lg" placeholder="Type your message here..."></textarea>
+
+            <!-- Skills/Technologies -->
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-blue-900 mb-4">Technologies Used</h3>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">Python Flask</span>
+                    <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">Gemimi API</span>
+                    <span class="bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium">HTML/CSS</span>
+                    <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium">JavaScript</span>
+                    <span class="bg-pink-100 text-pink-800 px-4 py-2 rounded-full text-sm font-medium">Tailwind CSS</span>
+                    <span class="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full text-sm font-medium">AI/ML</span>
+                </div>
             </div>
-            <button type="submit" class="contact-btn mt-4">Send Message</button>
-        </form>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="/" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                    Back to Home
+                </a>
+                <a href="/questions" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    View FAQs
+                </a>
+                <a href="mailto:your.email@example.com" class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    Email Me
+                </a>
+            </div>
+        </div>
     </main>
 </body>
-</html> 
+</html>
